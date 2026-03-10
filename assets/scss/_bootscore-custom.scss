@@ -1944,6 +1944,130 @@ body {
 
 
 // ══════════════════════════════════════════════════════
+// ── Services Landing Page — Unique Components ──
+// ══════════════════════════════════════════════════════
+
+// ── Services Grid Section ──
+.tld-services-grid-section {
+  background: var(--tld-off-white);
+}
+
+// ── Audience Hub Cards (dark section) ──
+.tld-audience-hub-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(201, 151, 58, 0.3);
+    transform: translateY(-4px);
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.tld-audience-hub-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 151, 58, 0.15);
+  border-radius: 50%;
+  color: var(--tld-gold);
+  margin-bottom: 1.25rem;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.tld-audience-hub-title {
+  font-family: var(--tld-font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--tld-white);
+  margin-bottom: 0.75rem;
+}
+
+.tld-audience-hub-desc {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.tld-audience-hub-link {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--tld-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.3s ease;
+
+  .tld-audience-hub-card:hover & {
+    gap: 0.75rem;
+  }
+}
+
+// ── Approach Section (split: text left, numbered cards right) ──
+.tld-approach-section {
+  background: var(--tld-white);
+}
+
+.tld-approach-card {
+  background: var(--tld-off-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  border-left: 3px solid var(--tld-gold);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.tld-approach-number {
+  display: block;
+  font-family: var(--tld-font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--tld-gold);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+.tld-approach-card-title {
+  font-family: var(--tld-font-heading);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--tld-dark-navy);
+  margin-bottom: 0.5rem;
+}
+
+.tld-approach-card-text {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--tld-muted);
+  margin-bottom: 0;
+}
+
+
+// ══════════════════════════════════════════════════════
 // ── About Page — Unique Components ──
 // ══════════════════════════════════════════════════════
 
@@ -2137,6 +2261,15 @@ body {
   .tld-audience-section,
   .tld-whyus-section {
     padding: 3.5rem 0;
+  }
+
+  // Services landing page responsive
+  .tld-approach-number {
+    font-size: 1.5rem;
+  }
+
+  .tld-approach-card {
+    padding: 1.25rem;
   }
 
   // About page: stack company info on mobile

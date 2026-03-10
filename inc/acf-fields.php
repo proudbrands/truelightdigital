@@ -16,6 +16,7 @@ if (!function_exists('acf_add_local_field_group')) {
 $acf_field_files = [
   'site-settings',
   'service-page-fields',
+  'services-page-fields',
   'about-page-fields',
   'audience-hub-fields',
   'blog-post-fields',
