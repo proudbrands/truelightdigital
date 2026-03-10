@@ -95,9 +95,10 @@ function tld_theme_setup() {
   add_image_size('tld-hero', 1920, 800, true);
   add_image_size('tld-blog-thumb', 800, 450, true);
 
-  // Parent already registers 'main-menu'. Add footer menu.
+  // Parent already registers 'main-menu'. Add mobile + footer menus.
   register_nav_menus([
-    'footer' => __('Footer Menu', 'tld'),
+    'mobile-menu' => __('Mobile Menu', 'tld'),
+    'footer'      => __('Footer Menu', 'tld'),
   ]);
 }
 

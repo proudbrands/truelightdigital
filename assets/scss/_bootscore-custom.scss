@@ -671,27 +671,41 @@ body {
 .tld-header {
   background-color: var(--tld-dark-navy) !important;
 
+  .container {
+    flex-wrap: nowrap;
+  }
+
+  .navbar-brand {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
   .navbar-brand img {
     height: 40px;
     width: auto;
+    max-width: 300px;
 
     @media (max-width: 575.98px) {
       height: 26px;
+      max-width: 240px;
     }
 
     @media (min-width: 576px) and (max-width: 991.98px) {
       height: 32px;
+      max-width: 270px;
     }
   }
 
-  .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.85);
+  // Desktop nav links — !important beats Bootstrap's variable-based padding
+  #bootscore-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.85) !important;
     font-weight: 500;
     font-size: 0.9375rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem !important;
+    white-space: nowrap;
 
     &:hover, &:focus, &.active {
-      color: var(--tld-white);
+      color: var(--tld-white) !important;
     }
   }
 
@@ -714,6 +728,68 @@ body {
     svg {
       color: var(--tld-white);
     }
+  }
+}
+
+
+// ── Dark Offcanvas (Mobile Menu) ──
+#offcanvas-navbar {
+  background-color: var(--tld-dark-navy);
+  color: var(--tld-white);
+
+  .offcanvas-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 1.5rem;
+
+    .offcanvas-title {
+      color: var(--tld-white);
+      font-weight: 600;
+    }
+
+    .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+    }
+  }
+
+  .offcanvas-body {
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    &:hover, &:focus {
+      color: var(--tld-gold);
+    }
+
+    &.active {
+      color: var(--tld-gold);
+    }
+  }
+
+  .dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    padding-left: 1rem;
+
+    .dropdown-item {
+      color: rgba(255, 255, 255, 0.7);
+
+      &:hover, &:focus {
+        color: var(--tld-gold);
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+
+  .tld-mobile-cta {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 

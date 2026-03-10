@@ -45,7 +45,19 @@ defined('ABSPATH') || exit;
                width="auto">
         </a>
 
-        <!-- Offcanvas Navbar (mobile) -->
+        <!-- Mobile Toggler -->
+        <button class="btn btn-outline-light d-lg-none ms-auto nav-toggler"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas-navbar"
+                aria-controls="offcanvas-navbar"
+                aria-label="<?php esc_attr_e('Toggle navigation', 'tld'); ?>">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+          </svg>
+        </button>
+
+        <!-- Offcanvas Navbar -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-navbar">
           <div class="offcanvas-header">
             <span class="h5 offcanvas-title"><?php esc_html_e('Menu', 'tld'); ?></span>
@@ -53,42 +65,46 @@ defined('ABSPATH') || exit;
           </div>
           <div class="offcanvas-body">
 
+            <!-- Desktop nav (inline on lg+) -->
             <?php
             wp_nav_menu([
               'theme_location' => 'main-menu',
               'container'      => false,
-              'menu_class'     => 'navbar-nav ms-auto mb-2 mb-lg-0',
+              'menu_class'     => 'navbar-nav ms-auto d-none d-lg-flex',
               'fallback_cb'    => '__return_false',
-              'items_wrap'     => '<ul id="bootscore-navbar" class="navbar-nav ms-auto %2$s">%3$s</ul>',
+              'items_wrap'     => '<ul id="bootscore-navbar" class="%2$s">%3$s</ul>',
               'depth'          => 2,
               'walker'         => new bootstrap_5_wp_nav_menu_walker(),
             ]);
             ?>
 
+            <!-- Mobile nav (offcanvas only) -->
+            <?php
+            wp_nav_menu([
+              'theme_location' => 'mobile-menu',
+              'container'      => false,
+              'menu_class'     => 'navbar-nav d-lg-none',
+              'fallback_cb'    => '__return_false',
+              'items_wrap'     => '<ul id="mobile-navbar" class="%2$s">%3$s</ul>',
+              'depth'          => 2,
+              'walker'         => new bootstrap_5_wp_nav_menu_walker(),
+            ]);
+            ?>
+
+            <!-- Mobile CTA -->
+            <div class="tld-mobile-cta d-lg-none">
+              <a href="#" class="btn tld-btn-gold w-100" data-bs-toggle="modal" data-bs-target="#tld-discovery-modal" data-bs-dismiss="offcanvas">
+                Book a Call
+              </a>
+            </div>
+
           </div>
         </div>
 
-        <!-- Header Actions -->
-        <div class="header-actions d-flex align-items-center">
-
-          <!-- Gold CTA Button (desktop) -->
-          <a href="#" class="btn tld-btn-gold d-none d-lg-inline-flex ms-3" data-bs-toggle="modal" data-bs-target="#tld-discovery-modal">
-            Book a Call
-          </a>
-
-          <!-- Mobile Toggler -->
-          <button class="btn btn-outline-light d-lg-none ms-2 nav-toggler"
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvas-navbar"
-                  aria-controls="offcanvas-navbar"
-                  aria-label="<?php esc_attr_e('Toggle navigation', 'tld'); ?>">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-            </svg>
-          </button>
-
-        </div><!-- .header-actions -->
+        <!-- Gold CTA Button (desktop) -->
+        <a href="#" class="btn tld-btn-gold d-none d-lg-inline-flex ms-3" data-bs-toggle="modal" data-bs-target="#tld-discovery-modal">
+          Book a Call
+        </a>
 
       </div><!-- .container -->
     </nav><!-- .navbar -->
