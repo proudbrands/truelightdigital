@@ -710,9 +710,19 @@ body {
   }
 
   .navbar-nav .dropdown-menu {
+    background-color: #fff;
     border: 1px solid var(--tld-border);
     border-radius: 0.5rem;
     box-shadow: var(--tld-shadow-lg);
+
+    .dropdown-item {
+      color: var(--tld-dark-navy);
+
+      &:hover, &:focus {
+        background-color: var(--tld-light-bg, #f8f9fa);
+        color: var(--tld-primary);
+      }
+    }
   }
 
   .nav-toggler {
@@ -790,6 +800,26 @@ body {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // Desktop dropdown override — solid background for readability
+  @media (min-width: 992px) {
+    .navbar-nav.d-lg-flex .dropdown-menu {
+      background-color: #fff;
+      border: 1px solid var(--tld-border);
+      border-radius: 0.5rem;
+      box-shadow: var(--tld-shadow-lg);
+      padding-left: 0;
+
+      .dropdown-item {
+        color: var(--tld-dark-navy);
+
+        &:hover, &:focus {
+          background-color: #f8f9fa;
+          color: var(--tld-primary);
+        }
+      }
+    }
   }
 }
 
