@@ -23,7 +23,7 @@ if (empty($recent_posts)) {
     <div class="d-flex justify-content-between align-items-end mb-5 flex-wrap gap-3">
       <div>
         <p class="tld-eyebrow tld-reveal">Insights</p>
-        <h2 class="tld-heading-section mb-0 tld-reveal tld-reveal-d1">Resources worth reading</h2>
+        <h2 class="tld-heading-section mb-0 tld-reveal tld-reveal-d1">Latest insights</h2>
       </div>
       <a href="<?= esc_url(home_url('/blog/')); ?>" class="btn btn-outline-primary tld-btn-arrow tld-reveal tld-reveal-d1">
         View all
@@ -37,9 +37,10 @@ if (empty($recent_posts)) {
           <a href="<?= esc_url(get_permalink($rp->ID)); ?>" class="tld-blog-card-v2">
             <?php if (has_post_thumbnail($rp->ID)) : ?>
               <div class="tld-blog-card-v2-img-wrap">
-                <img src="<?= esc_url(get_the_post_thumbnail_url($rp->ID, 'tld-blog-thumb')); ?>"
-                     alt="<?= esc_attr($rp->post_title); ?>"
-                     loading="lazy">
+                <?= wp_get_attachment_image(get_post_thumbnail_id($rp->ID), 'tld-blog-thumb', false, [
+                  'loading' => 'lazy',
+                  'sizes'   => '(min-width: 768px) 33vw, 100vw',
+                ]); ?>
               </div>
             <?php endif; ?>
             <div class="tld-blog-card-v2-body">

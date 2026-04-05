@@ -13,6 +13,11 @@ defined('ABSPATH') || exit;
 get_header();
 
 $read_time = function_exists('get_field') ? get_field('read_time') : '';
+// Auto-calculate read time if not manually set (200 words per minute)
+if (!$read_time) {
+  $word_count = str_word_count(strip_tags(get_the_content()));
+  $read_time = max(1, ceil($word_count / 200));
+}
 ?>
 
 <main id="primary" class="site-main">
@@ -118,6 +123,35 @@ $read_time = function_exists('get_field') ? get_field('read_time') : '';
                       </li>
                     <?php endwhile; wp_reset_postdata(); ?>
                   </ul>
+                </div>
+              <?php endif; ?>
+
+              <!-- Resources Widget -->
+              <?php
+              $sidebar_resources = get_posts([
+                'post_type'      => 'tld_resource',
+                'posts_per_page' => 2,
+                'post_status'    => 'publish',
+                'meta_key'       => 'resource_featured',
+                'meta_value'     => '1',
+              ]);
+              if ($sidebar_resources) :
+              ?>
+                <div class="tld-sidebar-widget">
+                  <h4 class="tld-sidebar-title">Free Resources</h4>
+                  <ul class="tld-sidebar-posts">
+                    <?php foreach ($sidebar_resources as $sr) :
+                      $sr_type = function_exists('get_field') ? get_field('resource_type', $sr->ID) : 'pdf';
+                    ?>
+                      <li>
+                        <a href="<?= esc_url(get_permalink($sr->ID)); ?>">
+                          <span class="tld-resource-type-badge tld-resource-type-badge--<?= esc_attr($sr_type); ?>" style="margin-bottom: 2px;"><?= esc_html(tld_resource_type_label($sr_type)); ?></span>
+                          <span class="tld-sidebar-post-title"><?= esc_html($sr->post_title); ?></span>
+                        </a>
+                      </li>
+                    <?php endforeach; ?>
+                  </ul>
+                  <a href="<?= esc_url(home_url('/resources/')); ?>" class="tld-sidebar-view-all">View all resources &rarr;</a>
                 </div>
               <?php endif; ?>
 

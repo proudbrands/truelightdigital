@@ -3,7 +3,7 @@
  * Template Name: About Page
  *
  * Premium multi-section about page with structured ACF-driven sections.
- * Sections: Hero -> Mission -> Story -> Values -> Approach -> Credentials -> Team -> CTA
+ * Sections: Hero -> Mission -> Story -> Team -> Values -> Approach -> Credentials -> Testimonials -> CTA
  *
  * @package TrueLightDigital
  */
@@ -76,7 +76,20 @@ $team             = function_exists('get_field') ? get_field('about_team') : [];
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 4: VALUES / CONVICTIONS
+       SECTION 4: TEAM (moved up — visitors want to know who)
+       ════════════════════════════════════════════════ -->
+  <?php if ($team) :
+    get_template_part('template-parts/about/team', null, [
+      'eyebrow' => $team_eyebrow,
+      'heading'  => $team_heading,
+      'text'     => $team_text,
+      'members'  => $team,
+    ]);
+  endif; ?>
+
+
+  <!-- ════════════════════════════════════════════════
+       SECTION 5: VALUES / CONVICTIONS
        ════════════════════════════════════════════════ -->
   <?php if ($values) :
     get_template_part('template-parts/about/values', null, [
@@ -89,7 +102,7 @@ $team             = function_exists('get_field') ? get_field('about_team') : [];
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 5: APPROACH PILLARS
+       SECTION 6: APPROACH PILLARS
        ════════════════════════════════════════════════ -->
   <?php if ($approach_items) :
     get_template_part('template-parts/about/approach', null, [
@@ -121,20 +134,13 @@ $team             = function_exists('get_field') ? get_field('about_team') : [];
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 7: TEAM
+       TESTIMONIALS
        ════════════════════════════════════════════════ -->
-  <?php if ($team) :
-    get_template_part('template-parts/about/team', null, [
-      'eyebrow' => $team_eyebrow,
-      'heading'  => $team_heading,
-      'text'     => $team_text,
-      'members'  => $team,
-    ]);
-  endif; ?>
+  <?php get_template_part('template-parts/testimonials', null, ['dark' => true]); ?>
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 8: CTA
+       CTA
        ════════════════════════════════════════════════ -->
   <?php tld_render_cta(); ?>
 

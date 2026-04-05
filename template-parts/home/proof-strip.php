@@ -16,7 +16,7 @@ $proof_bg = function_exists('get_field') ? get_field('home_proof_bg_image', 'opt
     <div class="row align-items-center">
       <div class="col-lg-5 mb-4 mb-lg-0">
         <h2 class="tld-proof-heading tld-reveal">
-          What better<br>looks like
+          What better looks like
         </h2>
         <div class="tld-gold-divider mt-3 tld-reveal tld-reveal-d1"></div>
       </div>

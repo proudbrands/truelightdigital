@@ -21,6 +21,8 @@ $acf_field_files = [
   'audience-hub-fields',
   'blog-post-fields',
   'block-fields',
+  'resource-fields',
+  'resources-page-fields',
 ];
 
 foreach ($acf_field_files as $file) {

@@ -213,6 +213,20 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
   <?php endif; ?>
 
 
+  <!-- Inline CTA after approach -->
+  <div class="container">
+    <?php get_template_part('template-parts/inline-cta', null, [
+      'text'     => 'Not sure which service fits? Start with a conversation.',
+      'btn_text' => 'Book a Discovery Call',
+    ]); ?>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       TESTIMONIALS
+       ════════════════════════════════════════════════ -->
+  <?php get_template_part('template-parts/testimonials', null, ['dark' => true]); ?>
+
+
   <!-- ════════════════════════════════════════════════
        SECTION 6: STATS
        ════════════════════════════════════════════════ -->

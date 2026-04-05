@@ -17,28 +17,34 @@ $headings-font-family:   "Playfair Display", Georgia, "Times New Roman", serif;
 $headings-font-weight:   700;
 $headings-color:         $dark;
 
-// Font sizes (static values for Bootstrap Sass math; fluid sizing applied via CSS in _bootscore-custom.scss)
+// Type scale — 3:4 ratio (0.75 factor), per Design for Hackers Ch 5.
+// Playfair Display for h1–h3 (≥24px); Inter for h4–h6 (<24px).
 $font-size-base:  1rem;     // 16px
-$h1-font-size:    3.25rem;
-$h2-font-size:    2.5rem;
-$h3-font-size:    1.75rem;
-$h4-font-size:    1.25rem;
-$h5-font-size:    1.125rem;
-$h6-font-size:    1rem;
+$h1-font-size:    2.8125rem; // 45px — Playfair 700
+$h2-font-size:    2.125rem;  // 34px — Playfair 600
+$h3-font-size:    1.5rem;    // 24px — Playfair 600 (minimum for Didone hairlines)
+$h4-font-size:    1.25rem;   // 20px — Inter 600 (below Playfair threshold)
+$h5-font-size:    1.0625rem; // 17px — Inter 600
+$h6-font-size:    1rem;      // 16px — Inter 600
 
-$lead-font-size:  1.1875rem;
+$lead-font-size:  1.125rem;
 $lead-font-weight: 400;
+
+$line-height-base: 1.5;
+
+$headings-line-height: 1.2;
 
 // ── Spacing ──
 $spacer: 1rem;
 
 // ── Body ──
 $body-bg:    #FFFFFF;
-$body-color: #2D3748;
+$body-color: #2A3444;  // Navy-shifted body text (not pure gray)
 
 // ── Links ──
-$link-color:            $secondary;
-$link-hover-color:      #d9a400;  // $secondary darkened ~12%
+// Gold on white fails WCAG AA (1.9:1). Use darkened gold for text links (4.6:1).
+$link-color:            #8B6914;
+$link-hover-color:      #6B5010;
 $link-decoration:       none;
 $link-hover-decoration: underline;
 
@@ -46,12 +52,12 @@ $link-hover-decoration: underline;
 $border-radius:    0.5rem;
 $border-radius-sm: 0.375rem;
 $border-radius-lg: 0.75rem;
-$border-color:     #E2E8F0;
+$border-color:     #DDE3EB;  // Navy-tinted border
 
-// ── Shadows ──
-$box-shadow:    0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-$box-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-$box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+// ── Shadows (navy-tinted, not pure black — richer depth per Ch 9) ──
+$box-shadow:    0 4px 6px -1px rgba(15, 32, 53, 0.08), 0 2px 4px -2px rgba(15, 32, 53, 0.05);
+$box-shadow-sm: 0 1px 3px 0 rgba(15, 32, 53, 0.06), 0 1px 2px -1px rgba(15, 32, 53, 0.04);
+$box-shadow-lg: 0 20px 25px -5px rgba(15, 32, 53, 0.10), 0 8px 10px -6px rgba(15, 32, 53, 0.05);
 
 // ── Buttons ──
 $btn-border-radius:    0.375rem;
@@ -66,7 +72,7 @@ $btn-font-size-lg:     1.0625rem;
 
 // ── Cards ──
 $card-border-radius:   0.75rem;
-$card-border-color:    #E2E8F0;
+$card-border-color:    #DDE3EB;
 $card-cap-padding-y:   1rem;
 $card-cap-padding-x:   1.25rem;
 
@@ -79,5 +85,5 @@ $container-max-widths: (
   md: 720px,
   lg: 960px,
   xl: 1140px,
-  xxl: 1200px,
+  xxl: 1320px,
 );

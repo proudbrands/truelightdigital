@@ -113,6 +113,75 @@ acf_add_local_field_group([
       'instructions' => 'Optional background image for the bottom CTA section.',
     ],
 
+    // ── Testimonials Tab ──
+    [
+      'key'   => 'field_tld_tab_testimonials',
+      'label' => 'Testimonials',
+      'type'  => 'tab',
+    ],
+    [
+      'key'          => 'field_tld_testimonials',
+      'label'        => 'Client Testimonials',
+      'name'         => 'testimonials',
+      'type'         => 'repeater',
+      'layout'       => 'block',
+      'button_label' => 'Add Testimonial',
+      'min'          => 0,
+      'max'          => 12,
+      'sub_fields'   => [
+        [
+          'key'   => 'field_tld_testimonial_quote',
+          'label' => 'Quote',
+          'name'  => 'quote',
+          'type'  => 'textarea',
+          'rows'  => 3,
+          'instructions' => 'The testimonial text. Keep to 1-3 sentences.',
+        ],
+        [
+          'key'   => 'field_tld_testimonial_name',
+          'label' => 'Name',
+          'name'  => 'name',
+          'type'  => 'text',
+        ],
+        [
+          'key'   => 'field_tld_testimonial_role',
+          'label' => 'Role / Title',
+          'name'  => 'role',
+          'type'  => 'text',
+          'instructions' => 'e.g. "Parish Priest" or "Marketing Director"',
+        ],
+        [
+          'key'   => 'field_tld_testimonial_org',
+          'label' => 'Organisation',
+          'name'  => 'organisation',
+          'type'  => 'text',
+        ],
+        [
+          'key'           => 'field_tld_testimonial_photo',
+          'label'         => 'Photo',
+          'name'          => 'photo',
+          'type'          => 'image',
+          'return_format' => 'url',
+          'preview_size'  => 'thumbnail',
+          'instructions'  => 'Optional headshot. Square crop recommended.',
+        ],
+        [
+          'key'           => 'field_tld_testimonial_segment',
+          'label'         => 'Audience Segment',
+          'name'          => 'segment',
+          'type'          => 'select',
+          'choices'       => [
+            'all'        => 'All / General',
+            'churches'   => 'Churches & Ministries',
+            'businesses' => 'Christian Businesses',
+            'catholic'   => 'Catholic Organisations',
+          ],
+          'default_value' => 'all',
+          'instructions'  => 'Which audience hub page should this appear on? "All" shows everywhere.',
+        ],
+      ],
+    ],
+
     // ── Default CTA Tab ──
     [
       'key'   => 'field_tld_tab_cta',

@@ -26,6 +26,7 @@ $services_heading  = function_exists('get_field') ? get_field('hub_services_head
 $services          = function_exists('get_field') ? get_field('hub_services') : [];
 $closing_heading   = function_exists('get_field') ? get_field('hub_closing_heading') : '';
 $closing_text      = function_exists('get_field') ? get_field('hub_closing_text') : '';
+$segment_type      = function_exists('get_field') ? get_field('segment_type') : 'all';
 ?>
 
 <main id="primary" class="site-main">
@@ -56,7 +57,7 @@ $closing_text      = function_exists('get_field') ? get_field('hub_closing_text'
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 3: THE CHALLENGE
+       SECTION 3: WHAT BETTER LOOKS LIKE
        ════════════════════════════════════════════════ -->
   <?php if ($challenge_heading || $challenge_points) : ?>
   <section class="tld-section bg-off-white">
@@ -96,6 +97,13 @@ $closing_text      = function_exists('get_field') ? get_field('hub_closing_text'
   </section>
   <?php endif; ?>
 
+  <!-- Inline CTA after outcomes -->
+  <div class="container">
+    <?php get_template_part('template-parts/inline-cta', null, [
+      'text'     => 'Want this for your organisation?',
+      'btn_text' => 'Book a Discovery Call',
+    ]); ?>
+  </div>
 
   <!-- ════════════════════════════════════════════════
        SECTION 4: WHAT WE DO (PILLAR CARDS)
@@ -144,11 +152,25 @@ $closing_text      = function_exists('get_field') ? get_field('hub_closing_text'
           ?>
             <p class="tld-reveal tld-reveal-d1" style="color: rgba(255,255,255,0.75); font-size: 1.125rem; line-height: 1.8;"><?= esc_html(trim($para)); ?></p>
           <?php endforeach; endif; ?>
+          <div class="mt-4 tld-reveal tld-reveal-d2">
+            <a href="#" class="btn tld-btn-gold btn-lg tld-btn-arrow" data-bs-toggle="modal" data-bs-target="#tld-discovery-modal">
+              Book a Discovery Call
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="ms-2"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
   <?php endif; ?>
+
+
+  <!-- ════════════════════════════════════════════════
+       TESTIMONIALS (segment-filtered)
+       ════════════════════════════════════════════════ -->
+  <?php get_template_part('template-parts/testimonials', null, [
+    'segment' => $segment_type ?: 'all',
+  ]); ?>
 
 
   <!-- ════════════════════════════════════════════════

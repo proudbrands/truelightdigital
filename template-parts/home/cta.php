@@ -15,7 +15,7 @@ $cta_bg = function_exists('get_field') ? get_field('home_cta_bg_image', 'option'
     <div class="tld-cta-modern-inner">
       <p class="tld-eyebrow tld-reveal" style="color: var(--tld-gold);">Get Started</p>
       <h2 class="tld-cta-modern-heading tld-reveal tld-reveal-d1">
-        Ready to build<br>something stronger?
+        Ready to build something stronger?
       </h2>
       <p class="tld-cta-modern-text tld-reveal tld-reveal-d2">
         A digital partner who understands faith, takes outcomes seriously, and knows how to make strategy usable. We work best with organizations that care about clarity, move with purpose, and invest in work that lasts.

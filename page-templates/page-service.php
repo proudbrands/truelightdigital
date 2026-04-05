@@ -284,6 +284,13 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
   </section>
   <?php endif; ?>
 
+  <!-- Inline CTA after process steps -->
+  <div class="container">
+    <?php get_template_part('template-parts/inline-cta', null, [
+      'text'     => 'This is how it starts. The first step is a conversation.',
+      'btn_text' => 'Book a Discovery Call',
+    ]); ?>
+  </div>
 
   <!-- ════════════════════════════════════════════════
        SECTION 6: RESULTS / IMPACT
@@ -344,6 +351,12 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
     </div>
   </section>
   <?php endif; ?>
+
+
+  <!-- ════════════════════════════════════════════════
+       TESTIMONIALS
+       ════════════════════════════════════════════════ -->
+  <?php get_template_part('template-parts/testimonials'); ?>
 
 
   <!-- ════════════════════════════════════════════════

@@ -15,7 +15,7 @@ defined('ABSPATH') || exit;
       <div class="col-lg-5 mb-4 mb-lg-0">
         <p class="tld-eyebrow tld-reveal">Why Faith-Aligned</p>
         <h2 class="tld-heading-lg tld-reveal tld-reveal-d1">
-          Language matters.<br>Tone matters.<br>Discernment matters.
+          Language matters. Tone matters. Discernment matters.
         </h2>
       </div>
       <div class="col-lg-6 offset-lg-1">

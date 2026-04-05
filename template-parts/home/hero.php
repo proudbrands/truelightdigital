@@ -18,8 +18,7 @@ $hero_bg = function_exists('get_field') ? get_field('home_hero_bg_image', 'optio
         <p class="tld-hero-label tld-reveal">Christian &amp; Catholic Digital Agency</p>
 
         <h1 class="tld-hero-home-title tld-reveal tld-reveal-d1">
-          Digital growth<br>
-          built on conviction.<br>
+          Digital growth built on conviction.
           <span class="tld-text-accent">Measured by results.</span>
         </h1>
 
@@ -33,6 +32,22 @@ $hero_bg = function_exists('get_field') ? get_field('home_hero_bg_image', 'optio
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="ms-2"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>
           </a>
           <a href="<?= esc_url(home_url('/services/')); ?>" class="btn btn-outline-light btn-lg">Explore Services</a>
+        </div>
+
+        <!-- Mobile metrics — visible below lg only -->
+        <div class="d-flex d-lg-none gap-4 mt-4 tld-hero-metrics-mobile tld-reveal tld-reveal-d3">
+          <div class="tld-metric-compact">
+            <span class="tld-metric-number" data-count="14">0</span><span class="tld-metric-plus">+</span>
+            <span class="tld-metric-label">Years</span>
+          </div>
+          <div class="tld-metric-compact">
+            <span class="tld-metric-number" data-count="100">0</span><span class="tld-metric-plus">%</span>
+            <span class="tld-metric-label">Faith-aligned</span>
+          </div>
+          <div class="tld-metric-compact">
+            <span class="tld-metric-number">3</span><span class="tld-metric-plus">x</span>
+            <span class="tld-metric-label">Traffic growth</span>
+          </div>
         </div>
 
       </div>

@@ -120,6 +120,7 @@ $social_youtube  = function_exists('get_field') ? get_field('social_youtube', 'o
       <!-- Footer Bottom -->
       <div class="tld-footer-bottom text-center">
         <p class="mb-0">&copy; <?= esc_html(date_i18n('Y')); ?> <?= esc_html(get_bloginfo('name')); ?>. All rights reserved.</p>
+        <p class="mb-0 tld-footer-credit">Website by <a href="https://proudbrands.co.uk" target="_blank" rel="noopener noreferrer">Proud Brands Limited</a> t/a True Light Digital</p>
       </div>
 
     </div><!-- .container -->

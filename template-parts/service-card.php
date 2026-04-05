@@ -22,9 +22,10 @@ $excerpt  = $subtitle ?: wp_trim_words($card_post->post_content, 20, '...');
 <a href="<?= esc_url(get_permalink($card_post->ID)); ?>" class="tld-service-card-v2">
   <?php if (has_post_thumbnail($card_post->ID)) : ?>
     <div class="tld-service-card-v2-img">
-      <img src="<?= esc_url(get_the_post_thumbnail_url($card_post->ID, 'tld-card')); ?>"
-           alt="<?= esc_attr($card_post->post_title); ?>"
-           loading="lazy">
+      <?= wp_get_attachment_image(get_post_thumbnail_id($card_post->ID), 'tld-card', false, [
+        'loading' => 'lazy',
+        'sizes'   => '(min-width: 768px) 33vw, 100vw',
+      ]); ?>
     </div>
   <?php endif; ?>
   <div class="tld-service-card-v2-body">

@@ -21,6 +21,7 @@ get_header();
   <?php get_template_part('template-parts/home/services'); ?>
   <?php get_template_part('template-parts/home/values'); ?>
   <?php get_template_part('template-parts/home/blog-teaser'); ?>
+  <?php get_template_part('template-parts/testimonials', null, ['dark' => true]); ?>
   <?php get_template_part('template-parts/home/cta'); ?>
 
 </main>

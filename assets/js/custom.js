@@ -1,35 +1,47 @@
 jQuery(function ($) {
 
+  // ── Respect reduced motion preference ──
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // ── Smooth scroll for anchor links ──
   $('a[href*="#"]:not([href="#"])').on('click', function (e) {
     var target = $(this.hash);
     if (target.length) {
       e.preventDefault();
-      $('html, body').animate({ scrollTop: target.offset().top - 80 }, 500);
+      if (prefersReduced) {
+        window.scrollTo(0, target.offset().top - 80);
+      } else {
+        $('html, body').animate({ scrollTop: target.offset().top - 80 }, 500);
+      }
     }
   });
 
   // ── IntersectionObserver for scroll-triggered reveals ──
-  // Uses inline styles to bypass all CSS specificity issues.
-  var revealEls = document.querySelectorAll('.tld-reveal');
-  var delays = { 'tld-reveal-d1': 150, 'tld-reveal-d2': 300, 'tld-reveal-d3': 450 };
+  // Supports 3 variants: .tld-reveal (translateY), .tld-reveal-fade (opacity only), .tld-reveal-left (translateX)
+  var revealEls = document.querySelectorAll('.tld-reveal, .tld-reveal-fade, .tld-reveal-left');
+  var delays = { 'tld-reveal-d1': 50, 'tld-reveal-d2': 100, 'tld-reveal-d3': 150 };
+
+  function getRevealType(el) {
+    if (el.classList.contains('tld-reveal-fade')) return 'fade';
+    if (el.classList.contains('tld-reveal-left')) return 'left';
+    return 'up';
+  }
 
   function showElement(el) {
     el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-    el.classList.remove('tld-reveal');
+    el.style.transform = 'translate(0)';
+    el.classList.remove('tld-reveal', 'tld-reveal-fade', 'tld-reveal-left');
   }
 
   function revealElement(el) {
-    // Background tabs: rAF is paused and setTimeout is throttled.
-    // Show immediately when page isn't visible.
-    if (document.hidden) {
+    // Skip animation for reduced motion preference or background tabs
+    if (prefersReduced || document.hidden) {
       showElement(el);
       return;
     }
 
-    // rAF-driven animation for smooth fade-in in focused tabs.
-    var duration = 700;
+    var type = getRevealType(el);
+    var duration = 400;
     var startTime = null;
     var done = false;
 
@@ -40,7 +52,13 @@ jQuery(function ($) {
       var eased = 1 - Math.pow(1 - progress, 3);
 
       el.style.opacity = String(eased);
-      el.style.transform = 'translateY(' + (30 * (1 - eased)).toFixed(1) + 'px)';
+      if (type === 'fade') {
+        // No transform — just opacity
+      } else if (type === 'left') {
+        el.style.transform = 'translateX(' + (-12 * (1 - eased)).toFixed(1) + 'px)';
+      } else {
+        el.style.transform = 'translateY(' + (12 * (1 - eased)).toFixed(1) + 'px)';
+      }
 
       if (progress < 1) {
         requestAnimationFrame(step);
@@ -62,11 +80,18 @@ jQuery(function ($) {
   }
 
   function triggerReveal(el) {
+    // Gold divider: special width animation (brand craft detail)
+    if (el.classList.contains('tld-gold-divider')) {
+      el.classList.remove('tld-reveal');
+      el.classList.add('tld-gold-divider-animate');
+      return;
+    }
+
     var delay = 0;
     for (var cls in delays) {
       if (el.classList.contains(cls)) { delay = delays[cls]; break; }
     }
-    if (delay) {
+    if (delay && !prefersReduced) {
       setTimeout(function () { revealElement(el); }, delay);
     } else {
       revealElement(el);
@@ -114,10 +139,10 @@ jQuery(function ($) {
   }
 
   function animateCounter(el) {
-    if (document.hidden) { showCounter(el); return; }
+    if (prefersReduced || document.hidden) { showCounter(el); return; }
 
     var target = parseInt(el.getAttribute('data-count'), 10);
-    var duration = 1500;
+    var duration = 800;
     var startTime = null;
     var done = false;
 
@@ -154,6 +179,36 @@ jQuery(function ($) {
     } else {
       counters.forEach(function (el) { counterObserver.observe(el); });
     }
+  }
+
+  // ── Resource Library: Category Filter ──
+  var filterBtns = document.querySelectorAll('.tld-resource-filter');
+  var resourceItems = document.querySelectorAll('.tld-resource-item');
+
+  if (filterBtns.length && resourceItems.length) {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.getAttribute('data-filter');
+
+        // Update active state
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        // Filter items
+        resourceItems.forEach(function (item) {
+          if (filter === 'all') {
+            item.classList.remove('tld-hidden');
+          } else {
+            var cats = item.getAttribute('data-categories') || '';
+            if (cats.split(' ').indexOf(filter) !== -1) {
+              item.classList.remove('tld-hidden');
+            } else {
+              item.classList.add('tld-hidden');
+            }
+          }
+        });
+      });
+    });
   }
 
 }); // jQuery End

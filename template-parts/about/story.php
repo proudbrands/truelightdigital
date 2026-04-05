@@ -33,7 +33,7 @@ $image   = $args['image'] ?? '';
         <?php endif; ?>
         <?php if ($image) : ?>
           <img src="<?= esc_url($image); ?>"
-               alt=""
+               alt="<?= esc_attr($heading ?: 'Our story'); ?>"
                class="tld-about-story-image tld-reveal tld-reveal-d2"
                loading="lazy">
         <?php endif; ?>

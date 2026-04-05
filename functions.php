@@ -94,12 +94,22 @@ function tld_theme_setup() {
   add_image_size('tld-card', 600, 400, true);
   add_image_size('tld-hero', 1920, 800, true);
   add_image_size('tld-blog-thumb', 800, 450, true);
+  add_image_size('tld-resource-preview', 800, 600, true);
 
   // Parent already registers 'main-menu'. Add mobile + footer menus.
   register_nav_menus([
     'mobile-menu' => __('Mobile Menu', 'tld'),
     'footer'      => __('Footer Menu', 'tld'),
   ]);
+}
+
+
+/**
+ * Skip to main content link (accessibility)
+ */
+add_action('wp_body_open', 'tld_skip_link', 1);
+function tld_skip_link() {
+  echo '<a href="#primary" class="tld-skip-link">Skip to main content</a>';
 }
 
 

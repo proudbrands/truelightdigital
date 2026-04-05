@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Sean/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"church parish community service traditional elegant\" --design-system -p \"Catholic Parishes of Aylesbury\")",
+      "Bash(python scripts/search.py \"hero social-proof CTA landing trust\" --domain landing -n 10)",
+      "Bash(python scripts/search.py \"animation accessibility reduced-motion hover touch\" --domain ux -n 10)",
+      "Bash(python scripts/search.py \"elegant traditional serif readable\" --domain typography -n 5)",
+      "Bash(python scripts/search.py \"navy gold trust corporate traditional\" --domain color -n 5)",
+      "Bash(echo \"=== No more <br> in headings ===\")",
+      "Bash(python scripts/search.py \"service agency B2B professional trust conversion\" --domain landing -n 8)",
+      "Bash(python scripts/search.py \"form modal conversion CTA accessibility keyboard\" --domain ux -n 10)",
+      "Bash(python scripts/search.py \"service agency professional trust authority\" --domain product -n 5)",
+      "Bash(python scripts/search.py \"conversion CTA funnel trust testimonial social-proof\" --domain landing -n 5)",
+      "Bash(python scripts/search.py \"empty states loading feedback progressive disclosure\" --domain ux -n 5)",
+      "Bash(grep -l \"inline-cta\" \"C:/Users/Sean/Local Sites/church-2/app/public/wp-content/themes/bootscore-child/page-templates/\"*.php)",
+      "Bash(curl -sL \"https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400..700&display=swap\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 Chrome/120.0.0.0\")",
+      "Bash(done)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/Sean/Local Sites/church-2/app/public/wp-content/themes/bootscore-child/**)"
+    ]
+  }
+}
