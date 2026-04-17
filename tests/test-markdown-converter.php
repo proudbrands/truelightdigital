@@ -3,7 +3,10 @@
  * Run: php tests/test-markdown-converter.php
  */
 
+define('ABSPATH', dirname(__DIR__) . '/');
 require __DIR__ . '/../inc/formation/markdown-converter.php';
+
+echo "=== test-markdown-converter ===\n";
 
 $failures = 0;
 function assertContains($haystack, $needle, $label) {
@@ -59,6 +62,24 @@ assertContains($out, '<!-- wp:separator -->', 'separator block');
 $out = tld_formation_md_to_blocks("First para.\n\nSecond para.\n");
 assertContains($out, '<p>First para.</p>', 'para 1');
 assertContains($out, '<p>Second para.</p>', 'para 2');
+
+// Bold leading a list item (common pattern in the pillar essays)
+$out = tld_formation_md_to_blocks("- **Historical information.** A parish accumulates content.\n- **Role descriptions.** One-page.");
+assertContains($out, '<li><strong>Historical information.</strong> A parish accumulates content.</li>', 'bold leading list item');
+
+// Inline code (backticks) — produces <code>...</code>, no literal backticks in output
+$out = tld_formation_md_to_blocks("The file `Newsletter_v4.docx` is here.\n");
+assertContains($out, '<code>Newsletter_v4.docx</code>', 'inline code wrapped in <code>');
+if (strpos($out, '`') !== false) {
+  echo "FAIL: literal backtick leaked into output — $out\n";
+  $failures++;
+} else {
+  echo "PASS: no literal backtick in inline-code output\n";
+}
+
+// Italic-tagline single-line paragraph (pillar openers)
+$out = tld_formation_md_to_blocks("*The discipline of speaking.*");
+assertContains($out, '<p><em>The discipline of speaking.</em></p>', 'italic tagline paragraph');
 
 echo "\n";
 if ($failures === 0) { echo "All tests passed.\n"; exit(0); }

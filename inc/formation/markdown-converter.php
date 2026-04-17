@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
  *   - tables
  *   - "What to do this week" callouts (promote to Callout block)
  *   - pull-worthy quotes (promote to core pullquote)
- *   - inline code (`...`) and fenced code blocks
+ *   - fenced code blocks (inline `code` IS supported via <code>)
  *
  * Pure function. Testable standalone.
  */
@@ -89,6 +89,9 @@ function tld_formation_md_to_blocks($markdown) {
  * then bold, then italic.
  */
 function _tld_md_inline($text) {
+  // Inline code (backticks) first — prevents their contents being mangled by emphasis rules
+  $text = preg_replace('/`([^`]+)`/', '<code>$1</code>', $text);
+
   // Links
   $text = preg_replace_callback('/\[([^\]]+)\]\(([^)]+)\)/', function ($m) {
     $url = function_exists('esc_url') ? esc_url($m[2]) : $m[2];
