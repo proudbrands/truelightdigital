@@ -129,24 +129,78 @@ $formation-callout-bg: #F6F1E3;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 
   &:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(28, 53, 87, 0.08); }
-  &__link { display: block; color: inherit; text-decoration: none; }
+
+  &__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:focus-visible {
+      text-decoration: none;
+      color: inherit;
+    }
+    // Prevent theme's global a:hover underline from cascading to inner text
+    &:hover *,
+    &:focus *,
+    &:active * {
+      text-decoration: none;
+    }
+    // Title still deserves a subtle affordance — underline *only* the title on hover
+    &:hover .tld-piece-card__title {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+  }
+
   &__image { display: block; width: 100%; height: auto; }
-  &__body { padding: 1.1rem 1.25rem; }
-  &__meta { display: flex; gap: 0.75rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  &__body { padding: 1.25rem 1.4rem 1.4rem; }
+  &__meta { display: flex; gap: 0.75rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
   &__type { color: $formation-gold; font-weight: 700; }
   &__time { color: #6e7487; }
   &__title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: $formation-navy-900;
-    margin: 0 0 0.4rem;
-    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+    text-decoration: none;
   }
-  &__summary { font-size: 0.88rem; color: #4a5168; margin: 0; line-height: 1.5; }
+  &__summary {
+    font-size: 0.9rem;
+    color: #4a5168;
+    margin: 0;
+    line-height: 1.55;
+    text-decoration: none;
+  }
 
   &--compact &__meta { font-size: 0.68rem; }
-  &--compact &__title { font-size: 1rem; }
-  &--featured { border-width: 2px; border-color: $formation-gold; }
+  &--compact &__title { font-size: 1.05rem; }
+  &--compact &__body { padding: 1rem 1.15rem 1.15rem; }
+  &--featured {
+    border-width: 2px;
+    border-color: $formation-gold;
+    .tld-piece-card__body { padding: 1.75rem 2rem 2rem; }
+    .tld-piece-card__title { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .tld-piece-card__summary { font-size: 1rem; }
+  }
+}
+
+// Broad safety net: anywhere inside a Formation surface, links should never
+// underline their entire card on hover. Matches the theme's global
+// `a:hover { text-decoration: underline; }` rule with equal specificity.
+.formation-landing,
+.formation-piece,
+.formation-related,
+main[id="primary"] {
+  a.tld-piece-card__link,
+  a.tld-pillar-card {
+    &:hover,
+    &:focus { text-decoration: none; }
+  }
 }
 
 // --- Cornerstone hero ---
