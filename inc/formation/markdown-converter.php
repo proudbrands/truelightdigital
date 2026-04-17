@@ -92,10 +92,11 @@ function _tld_md_inline($text) {
   // Inline code (backticks) first — prevents their contents being mangled by emphasis rules
   $text = preg_replace('/`([^`]+)`/', '<code>$1</code>', $text);
 
-  // Links
+  // Links — escape anchor text too (prevents e.g. [<script>](...) landing in post_content)
   $text = preg_replace_callback('/\[([^\]]+)\]\(([^)]+)\)/', function ($m) {
-    $url = function_exists('esc_url') ? esc_url($m[2]) : $m[2];
-    return '<a href="' . $url . '">' . $m[1] . '</a>';
+    $url   = function_exists('esc_url') ? esc_url($m[2]) : $m[2];
+    $label = htmlspecialchars($m[1], ENT_QUOTES, 'UTF-8');
+    return '<a href="' . $url . '">' . $label . '</a>';
   }, $text);
 
   // Bold (two asterisks)
