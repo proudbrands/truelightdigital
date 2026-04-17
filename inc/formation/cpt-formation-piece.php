@@ -46,27 +46,16 @@ function tld_formation_register_cpt() {
 }
 
 /**
- * Build the complete permalink for formation_piece posts since WordPress can't handle %pillar% natively.
+ * Replace %pillar% placeholder in generated permalinks with the piece's actual pillar slug.
  */
 add_filter('post_type_link', 'tld_formation_piece_permalink', 10, 2);
 
 function tld_formation_piece_permalink($post_link, $post) {
-  // Only process formation_piece posts
-  if ($post->post_type !== 'formation_piece') {
-    return $post_link;
-  }
+  if ($post->post_type !== 'formation_piece') return $post_link;
+  if (strpos($post_link, '%pillar%') === false) return $post_link;
 
-  // Get the pillar term
   $terms = get_the_terms($post->ID, 'pillar');
-  if (is_wp_error($terms) || empty($terms)) {
-    $pillar_slug = 'uncategorised-pillar';
-  } else {
-    $pillar_slug = $terms[0]->slug;
-  }
+  $slug  = (!is_wp_error($terms) && !empty($terms)) ? $terms[0]->slug : 'uncategorised-pillar';
 
-  // Build the permalink manually
-  $post_name = ( '' === $post->post_name ) ? sanitize_title( $post->post_title, $post->ID ) : $post->post_name;
-  $url = home_url( "formation/$pillar_slug/$post_name/" );
-
-  return $url;
+  return str_replace('%pillar%', $slug, $post_link);
 }
