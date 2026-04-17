@@ -138,6 +138,7 @@ $formation-callout-bg: #F6F1E3;
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     line-height: 1.1; font-weight: 700;
     margin: 0 0 0.8rem; max-width: 26ch;
+    color: #fff;  // override theme's dark h1
   }
   &__subtitle {
     font-size: 1.1rem; color: rgba(255,255,255,0.78);
@@ -167,9 +168,43 @@ $formation-callout-bg: #F6F1E3;
     font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 800;
     color: $formation-gold; line-height: 1;
   }
-  &__title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); margin: 0.6rem 0 1rem; }
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin: 0.6rem 0 1rem;
+    color: #fff;  // override theme's dark h1
+  }
   &__tagline { font-size: 1.1rem; line-height: 1.5; color: rgba(255,255,255,0.8); max-width: 55ch; }
   &__count { margin-top: 1.25rem; font-size: 0.85rem; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase; }
+}
+
+// --- Landing page header ---
+.formation-landing__header {
+  background: linear-gradient(180deg, $formation-navy-900 0%, $formation-navy-700 100%);
+  color: #fff;
+}
+.formation-landing__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: #fff;
+  margin: 0;
+}
+// Landing page: render the pillar cards in a 2x2 grid
+.formation-landing__content {
+  .wp-block-acf-tld-pillar-card {
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    // Intro paragraph full width, then cards 2-col on md+
+    > p:first-child { grid-column: 1 / -1; max-width: 70ch; margin-bottom: 1rem; }
+    > .wp-block-acf-tld-pillar-card { margin-bottom: 0; }
+  }
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 // --- ToC ---
