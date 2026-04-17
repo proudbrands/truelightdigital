@@ -13,19 +13,33 @@ $formation-callout-bg: #F6F1E3;
 .tld-pillar-card {
   display: grid;
   grid-template-columns: 100px 1fr auto;
-  gap: 1.25rem;
+  gap: 2rem;
   align-items: center;
   background: #F7F8FC;
   border: 1px solid #dde1ed;
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 2.25rem 2.5rem;
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active,
+  &:focus-visible {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(28, 53, 87, 0.1);
+    text-decoration: none;  // override theme's a:hover { text-decoration: underline; }
+    color: inherit;
+  }
+
+  // Child elements inherit link decoration in some browsers — explicitly suppress
+  &:hover &__title,
+  &:hover &__tagline,
+  &:hover &__count,
+  &:hover &__count-label,
+  &:hover &__arrow {
+    text-decoration: none;
   }
 
   &__number {
@@ -38,26 +52,41 @@ $formation-callout-bg: #F6F1E3;
   }
   &__title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     color: $formation-navy-900;
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.5rem;
+    text-decoration: none;
   }
   &__tagline {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: #4a5168;
     margin: 0;
-    line-height: 1.45;
+    line-height: 1.5;
+    text-decoration: none;
   }
-  &__meta { text-align: right; font-size: 0.78rem; color: #6e7487; }
+  &__meta {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #6e7487;
+    text-decoration: none;
+  }
   &__count {
     display: block;
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: $formation-navy-900;
     font-weight: 700;
     line-height: 1;
+    text-decoration: none;
   }
-  &__arrow { display: block; margin-top: 0.35rem; color: $formation-navy-700; font-size: 1.1rem; }
+  &__count-label { text-decoration: none; }
+  &__arrow {
+    display: block;
+    margin-top: 0.5rem;
+    color: $formation-navy-700;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
 }
 
 // --- Callout Action ---
@@ -189,21 +218,32 @@ $formation-callout-bg: #F6F1E3;
   color: #fff;
   margin: 0;
 }
-// Landing page: render the pillar cards in a 2x2 grid
+// Landing page: render the pillar cards in a 2x2 grid with generous whitespace
 .formation-landing__content {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+
   .wp-block-acf-tld-pillar-card {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 2rem;
     // Intro paragraph full width, then cards 2-col on md+
-    > p:first-child { grid-column: 1 / -1; max-width: 70ch; margin-bottom: 1rem; }
+    > p:first-child {
+      grid-column: 1 / -1;
+      max-width: 70ch;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #2c3240;
+    }
     > .wp-block-acf-tld-pillar-card { margin-bottom: 0; }
   }
   @media (min-width: 992px) {
     grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
   }
 }
 
