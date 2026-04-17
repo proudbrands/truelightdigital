@@ -55,6 +55,13 @@ $tld_includes = [
   'inc/acf-fields.php',
   'inc/acf-blocks.php',
   'inc/custom-post-types.php',
+  'inc/formation/cpt-formation-piece.php',
+  'inc/formation/taxonomies.php',
+  'inc/formation/reading-time.php',
+  'inc/formation/toc-builder.php',
+  'inc/formation/markdown-converter.php',
+  'inc/formation/seo-filters.php',
+  'inc/formation/resource-pillar.php',
 ];
 
 foreach ($tld_includes as $file) {
