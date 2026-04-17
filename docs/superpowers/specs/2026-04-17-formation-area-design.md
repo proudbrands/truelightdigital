@@ -9,7 +9,7 @@
 
 ## Goal
 
-Ship a structured learning zone called **Formation** on `truelight.digital`. Four pillars, four cornerstone essays at launch (~3,500–4,500 words each), content-first and quiet. This replaces the existing Blog as the agency's primary editorial surface. Formation is the agency's public thinking — it is what defensibility looks like for True Light Digital.
+Ship a structured learning zone called **Formation** on `truelight.digital`. Four pillars. At launch: **4 seeded cornerstone essays** (~3,500–4,500 words each, one per pillar, written by Sean + Claude Project) **plus 3 migrated blog posts** (one promoted to cornerstone in the Communications Champion pillar; two short reads in the Guardrails & Discernment pillar). Total: **7 pieces across 4 pillars at launch** — 5 cornerstones, 2 short reads. This replaces the existing Blog as the agency's primary editorial surface. Formation is the agency's public thinking — it is what defensibility looks like for True Light Digital.
 
 ## Decisions log
 
@@ -51,9 +51,9 @@ Hero taglines and meta descriptions are authored and provided; stored as ACF ter
 /blog/what-is-a-faith-driven-entrepreneur/       Remains
 /blog/christian-business-coaching/               Remains
 
-/blog/how-churches-are-using-ai        → 301 → /formation/guardrails-and-discernment/<new-slug>/
-/blog/church-seo-guide                 → 301 → /formation/communications-champion/<new-slug>/
-/blog/catholic-ai-guide                → 301 → /formation/guardrails-and-discernment/<new-slug>/
+/blog/how-churches-are-using-ai        → 301 → /formation/guardrails-and-discernment/how-churches-are-using-ai/
+/blog/church-seo-guide                 → 301 → /formation/communications-champion/church-seo-guide/
+/blog/catholic-ai-guide                → 301 → /formation/guardrails-and-discernment/catholic-ai-guide/
 ```
 
 No blanket `/blog/*` fallback redirect — the 2 retained posts keep `/blog/` valid.
@@ -294,13 +294,13 @@ Same treatment for `mobile-menu` location.
 
 **Migrate these 3 posts via Post Type Switcher plugin** (install → switch → uninstall):
 
-| ID | Title | New pillar | New piece_type |
-|---|---|---|---|
-| 118 | How Churches Are Using AI in 2026 | Guardrails & Discernment | Short Read |
-| 119 | Church SEO: The Complete Guide | Communications Champion | Cornerstone |
-| 120 | A Catholic Guide to AI | Guardrails & Discernment | Short Read |
+| ID | Title | New pillar | New piece_type | Slug treatment |
+|---|---|---|---|---|
+| 118 | How Churches Are Using AI in 2026 | Guardrails & Discernment | Short Read | Keep existing `post_name` |
+| 119 | Church SEO: The Complete Guide | Communications Champion | Cornerstone | Keep existing `post_name` |
+| 120 | A Catholic Guide to AI | Guardrails & Discernment | Short Read | Keep existing `post_name` |
 
-For each: switch post type, assign pillar + piece_type radios, write mandatory `summary`, confirm slug, publish.
+For each: switch post type, assign pillar + piece_type radios, write mandatory `summary`, confirm the `post_name` (slug) is unchanged — the redirect mu-plugin in §1 assumes slugs are preserved. Publish.
 
 **Keep these 2 posts as `post` type** (min-surface, no nav item):
 
