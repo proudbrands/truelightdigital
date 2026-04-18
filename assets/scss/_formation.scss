@@ -392,6 +392,19 @@ details.formation-toc-mobile {
   }
 }
 
+// --- Resource single pages (/resources/<slug>/) ---
+// The same markdown-converted post_content from the seed renders here
+// (6-25 <hr>s per resource). Hide them sitewide within a resource page.
+body.single-tld_resource {
+  .wp-block-separator,
+  article hr,
+  .entry-content hr,
+  .tld-section hr,
+  main hr {
+    display: none;
+  }
+}
+
 // --- Related pieces row ---
 .formation-related {
   background: #F7F8FC;
