@@ -450,14 +450,12 @@ body.single-tld_resource {
   font-family: 'Inter', sans-serif;
 }
 
-// --- Scroll-padding-top on the scrollport for Formation surfaces ---
-// scroll-padding-top on the root element is what the browser actually
-// uses when navigating to a hash fragment. scroll-margin-top on the
-// target is a supplementary hint; both together guarantee the heading
-// lands clear of the sticky nav across browsers.
-html:has(body.single-formation_piece),
-html:has(body.tax-pillar),
-html:has(body.single-tld_resource) {
+// --- Scroll-padding-top on the scrollport ---
+// Applied globally to <html> because the sticky nav is site-wide.
+// scroll-padding-top on the root is what modern browsers honour for
+// native hash-fragment navigation. scroll-margin-top on individual
+// targets (below, inside .formation-piece-body) is a supplement.
+html {
   scroll-padding-top: 180px;
   @media (max-width: 768px) { scroll-padding-top: 140px; }
 }
