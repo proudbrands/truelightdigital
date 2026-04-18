@@ -39,7 +39,7 @@
           match.link.parentElement.classList.add('is-active');
         }
       });
-    }, { rootMargin: '-140px 0px -55% 0px', threshold: 0 });
+    }, { rootMargin: '-190px 0px -55% 0px', threshold: 0 });
 
     targets.forEach(function (t) { observer.observe(t.el); });
   }
