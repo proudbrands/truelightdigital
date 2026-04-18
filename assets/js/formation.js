@@ -27,6 +27,9 @@
 
     if (!('IntersectionObserver' in window)) return;
 
+    // rootMargin top matches scroll-margin-top on headings (+ a small buffer)
+    // so the section becomes "active" the moment its heading settles below
+    // the sticky nav rather than 20% into the viewport.
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         var match = targets.find(function (t) { return t.el === entry.target; });
@@ -36,7 +39,7 @@
           match.link.parentElement.classList.add('is-active');
         }
       });
-    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    }, { rootMargin: '-120px 0px -60% 0px', threshold: 0 });
 
     targets.forEach(function (t) { observer.observe(t.el); });
   }
