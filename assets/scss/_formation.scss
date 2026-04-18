@@ -361,10 +361,13 @@ details.formation-toc-mobile {
     color: $formation-navy-900;
     font-weight: 700;
     // Offset anchor scroll so headings clear the sticky nav with real
-    // breathing room. Bootscore nav with gutters lands ~140px tall; give
-    // the heading at least 40px of daylight above it.
-    scroll-margin-top: 180px;
-    @media (max-width: 768px) { scroll-margin-top: 140px; }
+    // breathing room. Belt-and-braces — see also `html:has(...)` below
+    // which sets scroll-padding-top on the scroll container itself,
+    // which is what modern browsers honour for native hash navigation.
+    // !important overrides the parent theme's default scroll-margin-top
+    // of `var(--bs-scroll-margin-top, 55px)` that Bootstrap ships.
+    scroll-margin-top: 180px !important;
+    @media (max-width: 768px) { scroll-margin-top: 140px !important; }
   }
   h2 { font-size: 1.8rem; margin: 2.5rem 0 0.9rem; }
   h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; }
@@ -445,6 +448,18 @@ body.single-tld_resource {
   font-size: 0.88rem;
   color: #6b5410;
   font-family: 'Inter', sans-serif;
+}
+
+// --- Scroll-padding-top on the scrollport for Formation surfaces ---
+// scroll-padding-top on the root element is what the browser actually
+// uses when navigating to a hash fragment. scroll-margin-top on the
+// target is a supplementary hint; both together guarantee the heading
+// lands clear of the sticky nav across browsers.
+html:has(body.single-formation_piece),
+html:has(body.tax-pillar),
+html:has(body.single-tld_resource) {
+  scroll-padding-top: 180px;
+  @media (max-width: 768px) { scroll-padding-top: 140px; }
 }
 
 // --- Resources section (on cornerstone + pillar archive) ---
