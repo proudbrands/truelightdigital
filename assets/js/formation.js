@@ -86,6 +86,30 @@
     if (!iframe) return;
 
     if (title && titleEl) titleEl.textContent = title;
+
+    // On each load, inject a "reading mode" stylesheet into the iframe. This
+    // normalises documents whose HTML lacks the .page wrapper — they get
+    // proper padding + max-width so content isn't flush against the modal.
+    var injectOnce = function () {
+      iframe.removeEventListener('load', injectOnce);
+      try {
+        var doc = iframe.contentDocument;
+        if (!doc || !doc.head) return;
+        // Only inject if the document doesn't already have a .page wrapper
+        if (doc.querySelector('.page')) return;
+        var style = doc.createElement('style');
+        style.textContent =
+          '@media screen {' +
+          '  body { padding: 32px 40px !important; max-width: 820px; margin: 0 auto !important; box-sizing: border-box; }' +
+          '  @media (max-width: 640px) { body { padding: 20px 18px !important; } }' +
+          '}';
+        doc.head.appendChild(style);
+      } catch (e) {
+        // Cross-origin or other access failure — ignore, iframe will still render
+      }
+    };
+    iframe.addEventListener('load', injectOnce);
+
     iframe.src = url;
 
     modalState.lastFocus = document.activeElement;
