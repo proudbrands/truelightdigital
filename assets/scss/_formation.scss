@@ -348,6 +348,14 @@ details.formation-toc-mobile {
   color: #2c3240;
   max-width: 680px;
 
+  // Hide horizontal-rule separators. The source markdown uses `---` as
+  // section landmarks; on-page, the h2 headings already provide structure,
+  // and 9+ <hr>s per piece reads as visual noise. Keep source intact.
+  .wp-block-separator,
+  hr {
+    display: none;
+  }
+
   h2, h3 {
     font-family: 'Playfair Display', serif;
     color: $formation-navy-900;
