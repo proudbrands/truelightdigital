@@ -304,11 +304,11 @@ main[id="primary"] {
 // --- ToC ---
 .formation-toc {
   position: sticky;
-  // Keep ToC below the sticky site nav
-  top: 96px;
+  // Keep ToC below the sticky site nav (nav ~100px + 24px breathing room)
+  top: 124px;
   align-self: start;
   font-size: 0.88rem;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 150px);
   overflow-y: auto;
   &__label {
     font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -352,10 +352,10 @@ details.formation-toc-mobile {
     font-family: 'Playfair Display', serif;
     color: $formation-navy-900;
     font-weight: 700;
-    // Offset anchor scroll so headings land below the sticky nav.
-    // Nav is ~72px; add breathing room.
-    scroll-margin-top: 96px;
-    @media (max-width: 768px) { scroll-margin-top: 84px; }
+    // Offset anchor scroll so headings land well below the sticky nav
+    // with a proper visual gap. Nav is ~100px; add ~36px breathing room.
+    scroll-margin-top: 136px;
+    @media (max-width: 768px) { scroll-margin-top: 110px; }
   }
   h2 { font-size: 1.8rem; margin: 2.5rem 0 0.9rem; }
   h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; }
