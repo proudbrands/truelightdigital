@@ -86,6 +86,7 @@ $tld_includes = [
   'inc/formation/markdown-converter.php',
   'inc/formation/seo-filters.php',
   'inc/formation/resource-pillar.php',
+  'inc/formation/resource-kind.php',
 ];
 
 foreach ($tld_includes as $file) {

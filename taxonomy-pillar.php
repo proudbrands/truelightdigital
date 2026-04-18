@@ -90,6 +90,16 @@ $show_filter = $total_count >= 3;
 
     <?php get_template_part('template-parts/formation/email-capture', null, ['pillar_slug' => $term->slug]); ?>
   </div>
+
+  <?php
+  get_template_part('template-parts/formation/resources-grid', null, [
+    'pillar_term_id' => $term->term_id,
+    'heading'        => 'Resources for this pillar',
+    'intro'          => 'Templates, worksheets, and reflection guides to take away. All free, no email required.',
+  ]);
+  ?>
 </main>
+
+<?php get_template_part('template-parts/formation/preview-modal'); ?>
 <?php
 get_footer();

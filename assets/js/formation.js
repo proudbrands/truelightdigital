@@ -67,13 +67,120 @@
     });
   }
 
+  // --- Resource preview modal ---
+  var modalState = {
+    lastFocus: null,
+    isOpen: false,
+  };
+
+  function getModal() {
+    return document.getElementById('tld-preview-modal');
+  }
+
+  function openPreview(url, title) {
+    var modal = getModal();
+    if (!modal) return;
+
+    var iframe = modal.querySelector('.tld-preview-modal__iframe');
+    var titleEl = modal.querySelector('.tld-preview-modal__title');
+    if (!iframe) return;
+
+    if (title && titleEl) titleEl.textContent = title;
+    iframe.src = url;
+
+    modalState.lastFocus = document.activeElement;
+    modalState.isOpen = true;
+
+    modal.hidden = false;
+    // Double-RAF ensures the `hidden` removal has applied before we add the visible class
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        modal.classList.add('is-open');
+      });
+    });
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('tld-preview-open');
+
+    // Focus the close button for keyboard users
+    var closeBtn = modal.querySelector('.tld-preview-modal__close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePreview() {
+    var modal = getModal();
+    if (!modal || !modalState.isOpen) return;
+
+    modalState.isOpen = false;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('tld-preview-open');
+
+    // Wait for transition then hide and blank the iframe (releases memory + stops audio/video)
+    window.setTimeout(function () {
+      modal.hidden = true;
+      var iframe = modal.querySelector('.tld-preview-modal__iframe');
+      if (iframe) iframe.src = 'about:blank';
+    }, 250);
+
+    if (modalState.lastFocus && typeof modalState.lastFocus.focus === 'function') {
+      modalState.lastFocus.focus();
+    }
+  }
+
+  function trapFocus(e) {
+    if (!modalState.isOpen) return;
+    if (e.key !== 'Tab') return;
+    var modal = getModal();
+    if (!modal) return;
+    var focusables = modal.querySelectorAll('button, [href], iframe, [tabindex]:not([tabindex="-1"])');
+    if (!focusables.length) return;
+    var first = focusables[0];
+    var last  = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
+  function initPreview() {
+    // Delegated click on any Preview button
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-tld-preview-url]');
+      if (trigger) {
+        e.preventDefault();
+        openPreview(
+          trigger.getAttribute('data-tld-preview-url'),
+          trigger.getAttribute('data-tld-preview-title') || 'Preview'
+        );
+        return;
+      }
+      var closer = e.target.closest('[data-tld-preview-close]');
+      if (closer) {
+        e.preventDefault();
+        closePreview();
+      }
+    });
+
+    // ESC closes
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modalState.isOpen) {
+        closePreview();
+      } else {
+        trapFocus(e);
+      }
+    });
+  }
+
   if (document.readyState !== 'loading') {
     initToC();
     initFilterPills();
+    initPreview();
   } else {
     document.addEventListener('DOMContentLoaded', function () {
       initToC();
       initFilterPills();
+      initPreview();
     });
   }
 })();

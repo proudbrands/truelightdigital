@@ -65,8 +65,22 @@ if (have_posts()): while (have_posts()): the_post();
       <?php get_template_part('template-parts/formation/email-capture', null, ['pillar_slug' => $pillar_slug]); ?>
     </div>
 
+    <?php
+    // Resources grid: show tld_resource posts in this pillar
+    $pillar_term = (!is_wp_error($pillar_terms) && !empty($pillar_terms)) ? $pillar_terms[0] : null;
+    if ($pillar_term) {
+      get_template_part('template-parts/formation/resources-grid', null, [
+        'pillar_term_id' => $pillar_term->term_id,
+        'heading'        => 'Resources for this pillar',
+        'intro'          => 'Templates, worksheets, and reflection guides to take away. All free, no email required.',
+      ]);
+    }
+    ?>
+
     <?php get_template_part('template-parts/formation/related-pieces'); ?>
   </main>
+
+  <?php get_template_part('template-parts/formation/preview-modal'); ?>
   <?php
 
 endwhile; endif;
