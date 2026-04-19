@@ -7,9 +7,9 @@ defined('ABSPATH') || exit;
  * Single formation_piece -> ACF `summary` field
  * Pillar archive        -> ACF `pillar_meta_description` term field
  */
-add_filter('the_seo_framework_generated_description', 'tld_formation_seo_description', 20, 2);
+add_filter('the_seo_framework_generated_description', 'tld_formation_seo_description', 20, 3);
 
-function tld_formation_seo_description($description, $args = null) {
+function tld_formation_seo_description($description, $args = null, $type = '') {
   if (is_singular('formation_piece')) {
     $summary = get_field('summary', get_the_ID());
     if ($summary) return wp_strip_all_tags($summary);
