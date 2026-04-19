@@ -1,0 +1,87 @@
+{
+    "key": "group_tld_pillar_term",
+    "title": "Pillar Term Fields",
+    "fields": [
+        {
+            "key": "field_tld_pt_tagline",
+            "label": "Tagline",
+            "name": "pillar_tagline",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Rendered on the pillar archive hero under the term name. Keep to 15\u201330 words, in the essay's voice.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_tld_pt_meta_description",
+            "label": "Meta description",
+            "name": "pillar_meta_description",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Search-result snippet. 150\u2013160 characters. Use language a non-Catholic search-arriver will understand.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": 180,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tld_pt_sort_order",
+            "label": "Sort order",
+            "name": "pillar_sort_order",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Drives the 01\u201304 numbering in Pillar Cards and archive hero.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 99,
+            "min": 1,
+            "max": 99,
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "pillar"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1776420000
+}

@@ -53,7 +53,7 @@ function tld_register_resource_cpt() {
     'menu_position' => 25,
     'supports'      => ['title', 'editor', 'thumbnail', 'excerpt'],
     'rewrite'       => ['slug' => 'resources', 'with_front' => false],
-    'taxonomies'    => ['resource_category'],
+    'taxonomies'    => ['resource_category', 'pillar'],
   ]);
 }
 

@@ -67,10 +67,56 @@ function tld_register_acf_blocks() {
     'mode'            => 'preview',
     'supports'        => ['align' => ['full', 'wide'], 'mode' => true],
   ]);
+
+  // ── Formation blocks ──
+
+  // Pillar Card — one per pillar, four on the Formation landing page
+  acf_register_block_type([
+    'name'            => 'tld-pillar-card',
+    'title'           => 'Pillar Card',
+    'description'     => 'Featured card for one Formation pillar. Place four on the Formation landing page.',
+    'render_template' => get_stylesheet_directory() . '/template-parts/blocks/tld-pillar-card.php',
+    'category'        => 'formation',
+    'icon'            => 'book-alt',
+    'keywords'        => ['formation', 'pillar', 'card'],
+    'mode'            => 'preview',
+    'supports'        => ['align' => false, 'mode' => false, 'jsx' => false],
+  ]);
+
+  // Callout Action — "What to do this week" inline in cornerstone essays
+  acf_register_block_type([
+    'name'            => 'tld-callout-action',
+    'title'           => 'What to do this week',
+    'description'     => 'A gold-bordered action callout. Use at the end of cornerstone essays.',
+    'render_template' => get_stylesheet_directory() . '/template-parts/blocks/tld-callout-action.php',
+    'category'        => 'formation',
+    'icon'            => 'lightbulb',
+    'keywords'        => ['formation', 'callout', 'action', 'steps'],
+    'mode'            => 'edit',
+    'supports'        => ['align' => ['wide'], 'mode' => false, 'jsx' => false],
+  ]);
+
+  // Piece Card — hand-feature a specific Formation piece
+  acf_register_block_type([
+    'name'            => 'tld-piece-card',
+    'title'           => 'Piece Card',
+    'description'     => 'Feature a specific Formation piece. Used both as a block and by template grids.',
+    'render_template' => get_stylesheet_directory() . '/template-parts/blocks/tld-piece-card.php',
+    'category'        => 'formation',
+    'icon'            => 'media-document',
+    'keywords'        => ['formation', 'piece', 'feature'],
+    'mode'            => 'preview',
+    'supports'        => ['align' => false, 'mode' => false, 'jsx' => false],
+  ]);
 }
 
-// Register custom block category
+// Register custom block categories
 add_filter('block_categories_all', function ($categories) {
+  array_unshift($categories, [
+    'slug'  => 'formation',
+    'title' => 'Formation',
+    'icon'  => 'book-alt',
+  ]);
   array_unshift($categories, [
     'slug'  => 'tld',
     'title' => 'True Light Digital',

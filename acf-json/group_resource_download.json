@@ -1,0 +1,194 @@
+{
+    "key": "group_tld_resource_download",
+    "title": "Resource Download",
+    "fields": [
+        {
+            "key": "field_tld_res_supplemental_id",
+            "label": "Supplemental ID",
+            "name": "supplemental_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Short code from the content plan: T1, W2, R4, etc. Shown on cards and used for internal cross-referencing.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": 8,
+            "placeholder": "T1",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tld_res_kind",
+            "label": "Kind",
+            "name": "resource_kind",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "What kind of resource is this. Drives the badge on the card.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "resource_kind",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_tld_res_length",
+            "label": "Length",
+            "name": "length",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Human-readable length: \"1 page\", \"4 pages\", \"6 pages\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": 32,
+            "placeholder": "1 page",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tld_res_description",
+            "label": "Card description",
+            "name": "card_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "One or two sentences shown on the Resource Card. 150 chars ideal.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_tld_res_pdf",
+            "label": "PDF file",
+            "name": "pdf_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "The downloadable PDF.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_tld_res_docx",
+            "label": "DOCX file",
+            "name": "docx_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Editable Word version. Reflection guides don't need one \u2014 they are PDF-only.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "docx,doc"
+        },
+        {
+            "key": "field_tld_res_html_preview",
+            "label": "HTML preview file",
+            "name": "html_preview_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "Self-contained HTML rendered in an iframe inside the Preview modal. Must include its own CSS.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "html,htm"
+        },
+        {
+            "key": "field_tld_res_preview_image",
+            "label": "Preview thumbnail (optional)",
+            "name": "preview_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional \u2014 shown on the Resource Card if set. First-page render of the PDF works well.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "tld_resource"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1776480000
+}

@@ -48,6 +48,30 @@ function tld_editor_fonts() {
 
 
 /**
+ * Enqueue Formation-specific JS on Formation pages only.
+ */
+add_action('wp_enqueue_scripts', 'tld_enqueue_formation_assets', 20);
+function tld_enqueue_formation_assets() {
+  $is_formation = is_singular('formation_piece')
+    || is_tax('pillar')
+    || (is_page() && get_post_field('post_name') === 'formation');
+
+  if (!$is_formation) return;
+
+  $path = get_stylesheet_directory() . '/assets/js/formation.js';
+  if (file_exists($path)) {
+    wp_enqueue_script(
+      'tld-formation',
+      get_stylesheet_directory_uri() . '/assets/js/formation.js',
+      [],
+      date('YmdHi', filemtime($path)),
+      true
+    );
+  }
+}
+
+
+/**
  * Include theme files
  */
 $tld_includes = [
@@ -55,6 +79,14 @@ $tld_includes = [
   'inc/acf-fields.php',
   'inc/acf-blocks.php',
   'inc/custom-post-types.php',
+  'inc/formation/cpt-formation-piece.php',
+  'inc/formation/taxonomies.php',
+  'inc/formation/reading-time.php',
+  'inc/formation/toc-builder.php',
+  'inc/formation/markdown-converter.php',
+  'inc/formation/seo-filters.php',
+  'inc/formation/resource-pillar.php',
+  'inc/formation/resource-kind.php',
 ];
 
 foreach ($tld_includes as $file) {

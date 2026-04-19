@@ -1,0 +1,151 @@
+{
+    "key": "group_tld_block_callout_action",
+    "title": "Block \u2014 Callout Action",
+    "fields": [
+        {
+            "key": "field_tld_ca_label_override",
+            "label": "Label",
+            "name": "label_override",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Default \"What to do this week\". Override for other callouts.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "What to do this week",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tld_ca_heading",
+            "label": "Heading",
+            "name": "heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "e.g. Three steps to start",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tld_ca_intro",
+            "label": "Intro",
+            "name": "intro",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Optional leading sentence before the steps.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_tld_ca_steps",
+            "label": "Steps",
+            "name": "steps",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "min": 1,
+            "max": 5,
+            "pagination": 0,
+            "rows_per_page": 20,
+            "collapsed": "",
+            "button_label": "Add Step",
+            "sub_fields": [
+                {
+                    "key": "field_tld_ca_step_lead",
+                    "label": "Lead",
+                    "name": "step_lead",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Bold lead sentence.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_tld_ca_steps"
+                },
+                {
+                    "key": "field_tld_ca_step_detail",
+                    "label": "Detail",
+                    "name": "step_detail",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Optional supporting text after the lead.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_tld_ca_steps"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/tld-callout-action"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1776440000
+}
