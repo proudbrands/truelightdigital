@@ -44,7 +44,7 @@
     targets.forEach(function (t) { observer.observe(t.el); });
   }
 
-  // --- Filter pills ---
+  // --- Filter pills (pillar-archive single-axis filter by piece_type) ---
   function initFilterPills() {
     var container = document.querySelector('.formation-filter-pills');
     if (!container) return;
@@ -66,6 +66,39 @@
             card.style.display = 'none';
           }
         });
+      });
+    });
+  }
+
+  // --- Library two-axis filter (kind + pillar, AND-combined) ---
+  function initLibraryFilters() {
+    var bar = document.querySelector('.formation-filter-bar');
+    var grid = document.getElementById('formation-library-grid');
+    if (!bar || !grid) return;
+
+    var state = { kind: 'all', pillar: 'all' };
+    var items = grid.querySelectorAll('.formation-library-grid__item');
+
+    function applyFilter() {
+      items.forEach(function (el) {
+        var kinds = (el.getAttribute('data-kind') || '').split(/\s+/);
+        var pillars = (el.getAttribute('data-pillar') || '').split(/\s+/);
+        var kindOK   = state.kind   === 'all' || kinds.indexOf(state.kind)   !== -1;
+        var pillarOK = state.pillar === 'all' || pillars.indexOf(state.pillar) !== -1;
+        el.style.display = (kindOK && pillarOK) ? '' : 'none';
+      });
+    }
+
+    bar.querySelectorAll('.pill').forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        var axis = pill.getAttribute('data-library-filter');
+        var value = pill.getAttribute('data-filter');
+        state[axis] = value;
+        // Toggle aria-pressed within the same axis row
+        bar.querySelectorAll('[data-library-filter="' + axis + '"]').forEach(function (p) {
+          p.setAttribute('aria-pressed', p === pill ? 'true' : 'false');
+        });
+        applyFilter();
       });
     });
   }
@@ -202,11 +235,13 @@
   if (document.readyState !== 'loading') {
     initToC();
     initFilterPills();
+    initLibraryFilters();
     initPreview();
   } else {
     document.addEventListener('DOMContentLoaded', function () {
       initToC();
       initFilterPills();
+      initLibraryFilters();
       initPreview();
     });
   }

@@ -30,7 +30,7 @@ function tld_register_resource_cpt() {
     'hierarchical'      => true,
     'show_in_rest'      => true,
     'show_admin_column' => true,
-    'rewrite'           => ['slug' => 'resources/category', 'with_front' => false],
+    'rewrite'           => ['slug' => 'library/category', 'with_front' => false],
   ]);
 
   // ── CPT: Resource ──
@@ -52,7 +52,7 @@ function tld_register_resource_cpt() {
     'menu_icon'     => 'dashicons-media-document',
     'menu_position' => 25,
     'supports'      => ['title', 'editor', 'thumbnail', 'excerpt'],
-    'rewrite'       => ['slug' => 'resources', 'with_front' => false],
+    'rewrite'       => ['slug' => 'library', 'with_front' => false],
     'taxonomies'    => ['resource_category', 'pillar'],
   ]);
 }

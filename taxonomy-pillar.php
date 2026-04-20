@@ -1,8 +1,13 @@
 <?php
 /**
  * Pillar archive template.
- * Hero (from term fields) + featured cornerstone + grid of remaining pieces
- * + filter pills (if >= 3 pieces total).
+ *
+ * The pillar's cornerstone essay is rendered AS the pillar archive — the
+ * cornerstone is the primary content at /formation/<pillar-slug>/. Below
+ * the essay: short reads in this pillar, email capture, resources grid.
+ *
+ * The cornerstone's own single-piece URL is 404'd (see cpt-formation-piece.php
+ * template_redirect hook), so this is the single canonical surface.
  *
  * @package TrueLightDigital
  */
@@ -16,89 +21,131 @@ if (!$term || $term->taxonomy !== 'pillar') {
   return;
 }
 
-get_template_part('template-parts/formation/pillar-hero');
-
-// Query: all pieces in this pillar, newest first
-$all = new WP_Query([
+// Find the cornerstone for this pillar
+$cornerstone_q = new WP_Query([
   'post_type'      => 'formation_piece',
-  'posts_per_page' => -1,
-  'tax_query'      => [[
-    'taxonomy' => 'pillar',
-    'field'    => 'term_id',
-    'terms'    => [$term->term_id],
-  ]],
+  'post_status'    => 'publish',
+  'posts_per_page' => 1,
+  'tax_query'      => [
+    'relation' => 'AND',
+    ['taxonomy' => 'pillar',     'field' => 'term_id', 'terms' => [$term->term_id]],
+    ['taxonomy' => 'piece_type', 'field' => 'slug',    'terms' => ['cornerstone']],
+  ],
   'orderby' => 'date',
   'order'   => 'DESC',
 ]);
 
-// Split: featured = most recent cornerstone; grid = everything else
-$featured_id = null;
-$grid_ids    = [];
-if ($all->have_posts()) {
-  while ($all->have_posts()) {
-    $all->the_post();
-    $types = get_the_terms(get_the_ID(), 'piece_type');
-    $slug  = (!is_wp_error($types) && !empty($types)) ? $types[0]->slug : '';
-    if (!$featured_id && $slug === 'cornerstone') {
-      $featured_id = get_the_ID();
-    } else {
-      $grid_ids[] = get_the_ID();
-    }
+$has_cornerstone = $cornerstone_q->have_posts();
+
+if ($has_cornerstone) {
+  $cornerstone_q->the_post();
+
+  // Build ToC (respects toc_enabled ACF field; defaults on for cornerstones)
+  $toc_enabled = (get_field('toc_enabled') !== false);
+  $content     = apply_filters('the_content', get_the_content());
+
+  if ($toc_enabled) {
+    $toc_data = tld_formation_build_toc($content);
+    $content  = $toc_data['html'];
+    $headings = $toc_data['headings'];
+  } else {
+    $headings = [];
   }
-  wp_reset_postdata();
-}
 
-$total_count = (int) $all->post_count;
-$show_filter = $total_count >= 3;
-?>
-<main id="primary" class="site-main">
-  <div class="container py-4">
+  // Hero (cornerstone hero renders from current post context)
+  get_template_part('template-parts/formation/cornerstone-hero');
+  ?>
+  <main id="primary" class="site-main formation-piece">
+    <?php if ($toc_enabled && !empty($headings)): ?>
+      <div class="container">
+        <?php get_template_part('template-parts/formation/toc', null, ['headings' => $headings, 'mobile' => true]); ?>
+        <div class="formation-piece-body-grid">
+          <article class="formation-piece-body">
+            <?php echo $content; ?>
+          </article>
+          <?php get_template_part('template-parts/formation/toc', null, ['headings' => $headings, 'mobile' => false]); ?>
+        </div>
+      </div>
+    <?php else: ?>
+      <div class="container">
+        <article class="formation-piece-body">
+          <?php echo $content; ?>
+        </article>
+      </div>
+    <?php endif; ?>
 
-    <?php if ($featured_id): ?>
-      <section class="formation-featured mb-5">
-        <?php get_template_part('template-parts/blocks/tld-piece-card', null, [
-          'piece_id'     => $featured_id,
-          'variant'      => 'featured',
-          'show_summary' => true,
-        ]); ?>
+    <div class="container">
+      <?php get_template_part('template-parts/formation/email-capture', null, ['pillar_slug' => $term->slug]); ?>
+    </div>
+
+    <?php
+    // "More from this pillar" — short reads (non-cornerstone) in this pillar
+    $shorts = new WP_Query([
+      'post_type'      => 'formation_piece',
+      'post_status'    => 'publish',
+      'posts_per_page' => -1,
+      'post__not_in'   => [get_the_ID()],
+      'tax_query'      => [
+        'relation' => 'AND',
+        ['taxonomy' => 'pillar',     'field' => 'term_id', 'terms' => [$term->term_id]],
+        ['taxonomy' => 'piece_type', 'field' => 'slug',    'terms' => ['short-read', 'field-note'], 'operator' => 'IN'],
+      ],
+      'orderby' => 'date',
+      'order'   => 'DESC',
+    ]);
+
+    if ($shorts->have_posts()): ?>
+      <section class="formation-related">
+        <div class="container">
+          <h2 class="formation-related__heading">More from this pillar</h2>
+          <div class="formation-pieces-grid row">
+            <?php while ($shorts->have_posts()): $shorts->the_post();
+              $pt_terms = get_the_terms(get_the_ID(), 'piece_type');
+              $pt = (!is_wp_error($pt_terms) && !empty($pt_terms)) ? $pt_terms[0]->slug : '';
+            ?>
+              <div class="col-md-6 col-lg-4 mb-4" data-piece-type="<?php echo esc_attr($pt); ?>">
+                <?php get_template_part('template-parts/blocks/tld-piece-card', null, [
+                  'piece_id'     => get_the_ID(),
+                  'variant'      => 'default',
+                  'show_summary' => true,
+                ]); ?>
+              </div>
+            <?php endwhile; wp_reset_postdata(); ?>
+          </div>
+        </div>
       </section>
     <?php endif; ?>
 
-    <?php if ($show_filter): ?>
-      <nav class="formation-filter-pills" aria-label="Filter by piece type">
-        <button type="button" class="pill" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" class="pill" data-filter="cornerstone" aria-pressed="false">Cornerstones</button>
-        <button type="button" class="pill" data-filter="short-read" aria-pressed="false">Short Reads</button>
-        <button type="button" class="pill" data-filter="field-note" aria-pressed="false">Field Notes</button>
-      </nav>
-    <?php endif; ?>
-
-    <div class="formation-pieces-grid row">
-      <?php foreach ($grid_ids as $pid):
-        $piece_type_terms = get_the_terms($pid, 'piece_type');
-        $pt = (!is_wp_error($piece_type_terms) && !empty($piece_type_terms)) ? $piece_type_terms[0]->slug : '';
-      ?>
-        <div class="col-md-6 col-lg-4 mb-4" data-piece-type="<?php echo esc_attr($pt); ?>">
-          <?php get_template_part('template-parts/blocks/tld-piece-card', null, [
-            'piece_id'     => $pid,
-            'variant'      => 'default',
-            'show_summary' => true,
-          ]); ?>
-        </div>
-      <?php endforeach; ?>
-    </div>
-
-    <?php get_template_part('template-parts/formation/email-capture', null, ['pillar_slug' => $term->slug]); ?>
-  </div>
-
+    <?php
+    // Resources grid for this pillar
+    get_template_part('template-parts/formation/resources-grid', null, [
+      'pillar_term_id' => $term->term_id,
+      'heading'        => 'Resources for this pillar',
+      'intro'          => 'Templates, worksheets, and reflection guides to take away. All free, no email required.',
+    ]);
+    ?>
+  </main>
   <?php
-  get_template_part('template-parts/formation/resources-grid', null, [
-    'pillar_term_id' => $term->term_id,
-    'heading'        => 'Resources for this pillar',
-    'intro'          => 'Templates, worksheets, and reflection guides to take away. All free, no email required.',
-  ]);
+  wp_reset_postdata();
+} else {
+  // Fallback: no cornerstone seeded yet — show the old-style pillar hero + grid
+  get_template_part('template-parts/formation/pillar-hero');
   ?>
-</main>
+  <main id="primary" class="site-main">
+    <div class="container py-4">
+      <p><em>This pillar's cornerstone essay is not yet published.</em></p>
+      <?php
+      get_template_part('template-parts/formation/resources-grid', null, [
+        'pillar_term_id' => $term->term_id,
+        'heading'        => 'Resources for this pillar',
+        'intro'          => '',
+      ]);
+      ?>
+    </div>
+  </main>
+  <?php
+}
+?>
 
 <?php get_template_part('template-parts/formation/preview-modal'); ?>
 <?php

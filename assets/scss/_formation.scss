@@ -242,6 +242,68 @@ main[id="primary"] {
   &__time { font-size: 0.8rem; color: #6e7487; }
 }
 
+// --- Library landing page ---
+.formation-library-hero {
+  background: linear-gradient(180deg, $formation-navy-900, $formation-navy-700);
+  color: #fff;
+  padding: 3.5rem 0;
+
+  &__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $formation-gold;
+    margin-bottom: 0.75rem;
+  }
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    color: #fff;
+    margin: 0 0 0.8rem;
+  }
+  &__intro {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 65ch;
+    line-height: 1.55;
+    font-size: 1.05rem;
+    p { margin: 0 0 0.9rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: $formation-gold; }
+  }
+}
+
+.formation-filter-bar {
+  margin: 1.75rem 0 2rem;
+  display: grid;
+  gap: 0.85rem;
+}
+.formation-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.formation-filter-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6e7487;
+  margin-right: 0.25rem;
+}
+
+.formation-library-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) { grid-template-columns: 1fr 1fr; }
+  @media (min-width: 1200px) { grid-template-columns: 1fr 1fr 1fr; }
+
+  &__item > .tld-resource-card { height: 100%; }
+}
+
 // --- Audience archive hero + per-pillar grouping ---
 .formation-audience-hero {
   background: linear-gradient(180deg, $formation-navy-900, $formation-navy-700);

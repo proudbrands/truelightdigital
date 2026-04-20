@@ -54,7 +54,9 @@ add_action('wp_enqueue_scripts', 'tld_enqueue_formation_assets', 20);
 function tld_enqueue_formation_assets() {
   $is_formation = is_singular('formation_piece')
     || is_tax('pillar')
-    || (is_page() && get_post_field('post_name') === 'formation');
+    || is_tax('audience')
+    || (is_page() && in_array(get_post_field('post_name'), ['formation', 'library'], true))
+    || is_page_template(['page-templates/page-formation.php', 'page-templates/page-library.php']);
 
   if (!$is_formation) return;
 

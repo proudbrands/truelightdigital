@@ -59,3 +59,27 @@ function tld_formation_piece_permalink($post_link, $post) {
 
   return str_replace('%pillar%', $slug, $post_link);
 }
+
+/**
+ * 404 cornerstone single URLs. Cornerstones now render at the pillar root
+ * (/formation/<pillar-slug>/) via taxonomy-pillar.php, so the cornerstone's
+ * own URL under /formation/<pillar-slug>/<slug>/ is a duplicate and should
+ * not resolve.
+ */
+add_action('template_redirect', 'tld_formation_404_cornerstone_single');
+
+function tld_formation_404_cornerstone_single() {
+  if (!is_singular('formation_piece')) return;
+
+  $piece_types = get_the_terms(get_the_ID(), 'piece_type');
+  if (is_wp_error($piece_types) || empty($piece_types)) return;
+
+  if ($piece_types[0]->slug !== 'cornerstone') return;
+
+  global $wp_query;
+  $wp_query->set_404();
+  status_header(404);
+  nocache_headers();
+  include get_query_template('404');
+  exit;
+}

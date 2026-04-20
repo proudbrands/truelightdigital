@@ -23,7 +23,7 @@ function tld_formation_register_resource_kind() {
     ],
     'hierarchical'       => false,
     'public'             => false,
-    'publicly_queryable' => true,
+    'publicly_queryable' => false,  // Phase 3: filter-only, no public archive
     'show_ui'            => true,
     'show_in_rest'       => true,
     'show_admin_column'  => true,
