@@ -267,57 +267,59 @@ body {
 }
 
 // ── Service Content ──
+// Used by page-service.php (wrapped in .row > .col-lg-8) and single-tld_resource.php
+// (no inner column — the parent .col-lg-8 already constrains width). Descendant
+// selectors target h2/h3/p directly so both layouts pick up the typography.
 .tld-service-content {
-  .col-lg-8 {
-    h2 {
-      font-family: var(--tld-font-heading);
-      font-size: 1.75rem;
-      font-weight: 600;
+  h2 {
+    font-family: var(--tld-font-heading);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--tld-dark-navy);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h3 {
+    font-family: var(--tld-font-body);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--tld-dark-navy);
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--tld-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  ul, ol {
+    color: var(--tld-body);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  a {
+    color: var(--tld-gold-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
       color: var(--tld-dark-navy);
-      margin-top: 2.5rem;
-      margin-bottom: 0.75rem;
     }
+  }
 
-    h3 {
-      font-family: var(--tld-font-body);
-      font-size: 1.375rem;
-      font-weight: 600;
-      color: var(--tld-dark-navy);
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--tld-body);
-      font-size: 1.0625rem;
-      line-height: 1.8;
-    }
-
-    ul, ol {
-      color: var(--tld-body);
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      padding-left: 1.25rem;
-
-      li {
-        margin-bottom: 0.35rem;
-      }
-    }
-
-    a {
-      color: var(--tld-gold-text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-
-      &:hover {
-        color: var(--tld-dark-navy);
-      }
-    }
-
-    // First heading doesn't need top margin
-    > :first-child {
-      margin-top: 0;
-    }
+  // First heading doesn't need top margin
+  .col-lg-8 > :first-child,
+  > :first-child {
+    margin-top: 0;
   }
 }
 
@@ -2432,7 +2434,7 @@ body {
     font-size: 2rem;
   }
 
-  .tld-service-content .col-lg-8 {
+  .tld-service-content {
     h2 { font-size: 1.5rem; }
     h3 { font-size: 1.25rem; }
   }
@@ -3553,9 +3555,12 @@ body {
 
 
 // ── Single Resource: Sidebar ──
+// top: 164px clears the ~140px sticky site header with breathing room —
+// matches the cornerstone ToC pattern in _formation.scss. At 100px the
+// callout card was getting hidden behind the header when scrolled.
 .tld-resource-sidebar {
   position: sticky;
-  top: 100px;
+  top: 164px;
 }
 
 .tld-resource-sidebar-card {
