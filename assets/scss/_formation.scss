@@ -592,10 +592,18 @@ body.single-tld_resource {
 // --- Filter pills on pillar archive ---
 .formation-filter-pills {
   display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0;
-  .pill {
-    background: #fff; border: 1px solid #dde1ed; border-radius: 999px;
-    padding: 0.4rem 1rem; font-size: 0.82rem; color: #4a5168; cursor: pointer;
-    &[aria-pressed="true"] { background: $formation-navy-700; color: #fff; border-color: $formation-navy-700; }
+}
+
+// Shared pill styling — used on pillar archives AND the library filter bar.
+.formation-filter-pills .pill,
+.formation-filter-bar .pill {
+  background: #fff; border: 1px solid #dde1ed; border-radius: 999px;
+  padding: 0.4rem 1rem; font-size: 0.82rem; color: #4a5168; cursor: pointer;
+  font-family: 'Inter', sans-serif; line-height: 1.2;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  &:hover { border-color: #b8c0d4; color: $formation-navy-700; }
+  &[aria-pressed="true"] {
+    background: $formation-navy-700; color: #fff; border-color: $formation-navy-700;
   }
 }
 

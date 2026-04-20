@@ -70,22 +70,37 @@
     });
   }
 
-  // --- Library two-axis filter (kind + pillar, AND-combined) ---
+  // --- Library filter (generic N-axis, AND-combined) ---
+  // Axes are discovered from [data-library-filter] on the pill buttons, so
+  // adding a new filter row in markup (with a matching data-<axis> attr on
+  // grid items) needs no JS changes.
   function initLibraryFilters() {
     var bar = document.querySelector('.formation-filter-bar');
     var grid = document.getElementById('formation-library-grid');
     if (!bar || !grid) return;
 
-    var state = { kind: 'all', pillar: 'all' };
+    var axes = [];
+    var state = {};
+    bar.querySelectorAll('[data-library-filter]').forEach(function (pill) {
+      var axis = pill.getAttribute('data-library-filter');
+      if (axes.indexOf(axis) === -1) {
+        axes.push(axis);
+        state[axis] = 'all';
+      }
+    });
+
     var items = grid.querySelectorAll('.formation-library-grid__item');
 
     function applyFilter() {
       items.forEach(function (el) {
-        var kinds = (el.getAttribute('data-kind') || '').split(/\s+/);
-        var pillars = (el.getAttribute('data-pillar') || '').split(/\s+/);
-        var kindOK   = state.kind   === 'all' || kinds.indexOf(state.kind)   !== -1;
-        var pillarOK = state.pillar === 'all' || pillars.indexOf(state.pillar) !== -1;
-        el.style.display = (kindOK && pillarOK) ? '' : 'none';
+        var show = true;
+        for (var i = 0; i < axes.length; i++) {
+          var axis = axes[i];
+          if (state[axis] === 'all') continue;
+          var values = (el.getAttribute('data-' + axis) || '').split(/\s+/);
+          if (values.indexOf(state[axis]) === -1) { show = false; break; }
+        }
+        el.style.display = show ? '' : 'none';
       });
     }
 
@@ -94,7 +109,6 @@
         var axis = pill.getAttribute('data-library-filter');
         var value = pill.getAttribute('data-filter');
         state[axis] = value;
-        // Toggle aria-pressed within the same axis row
         bar.querySelectorAll('[data-library-filter="' + axis + '"]').forEach(function (p) {
           p.setAttribute('aria-pressed', p === pill ? 'true' : 'false');
         });
