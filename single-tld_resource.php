@@ -68,9 +68,7 @@ get_header();
 
             <!-- Post Content (editor body) -->
             <div class="tld-service-content">
-              <div class="col-lg-8">
-                <?php the_content(); ?>
-              </div>
+              <?php the_content(); ?>
             </div>
 
             <!-- Download Box -->
