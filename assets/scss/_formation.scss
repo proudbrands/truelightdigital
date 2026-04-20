@@ -453,6 +453,15 @@ main[id="primary"] {
       line-height: 1.6;
       color: #2c3240;
     }
+    // Non-pillar-card direct children (headings, framing paragraphs, the
+    // role grid) need to span the whole grid — otherwise they fall into
+    // a single 1fr column and get squashed next to a pillar card.
+    > h2,
+    > h3,
+    > .formation-section-lede,
+    > .formation-role-grid {
+      grid-column: 1 / -1;
+    }
     > .wp-block-acf-tld-pillar-card { margin-bottom: 0; }
   }
   @media (min-width: 992px) {
