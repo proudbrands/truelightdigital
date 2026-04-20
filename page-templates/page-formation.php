@@ -19,8 +19,10 @@ defined('ABSPATH') || exit;
 
 get_header();
 
-// Hero image — placeholder Unsplash URL. Replace with attachment in Phase 2.
-$hero_image = 'https://images.unsplash.com/photo-1519741497674-611481863552?w=2000&q=75';
+// Hero image — prefer ACF field on the page; fall back to the Unsplash
+// placeholder so the page never renders without a hero.
+$hero_image_acf = function_exists('get_field') ? get_field('hero_image') : '';
+$hero_image = $hero_image_acf ?: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=2000&q=75';
 ?>
 <main id="primary" class="site-main formation-landing">
 
