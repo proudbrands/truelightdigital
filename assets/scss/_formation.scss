@@ -618,6 +618,166 @@ body.single-tld_resource {
   font-family: 'Inter', sans-serif;
 }
 
+// --- Landing hero: full-bleed image variant ---
+// Used on /formation/ landing. Replaces the previous inline-styled
+// .formation-landing__header block in page-formation.php.
+.formation-hero--image {
+  position: relative;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: $formation-navy-900;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg,
+      rgba(15,32,53,0.92) 0%,
+      rgba(15,32,53,0.70) 45%,
+      rgba(15,32,53,0.25) 100%);
+  }
+
+  .container { position: relative; z-index: 2; }
+
+  &__eyebrow {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $formation-gold;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    color: #fff;
+    @media (max-width: 768px) { font-size: 2.2rem; }
+  }
+
+  &__intro {
+    max-width: 52ch;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.85);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) { min-height: 320px; }
+}
+
+// --- Section lede: framing paragraph before pillar/role sections ---
+.formation-section-lede {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: $formation-navy-700;
+  max-width: 62ch;
+  margin: 2.5rem auto 2rem;
+  text-align: left;
+}
+
+// --- Role grid + card ("Or start from where you stand") ---
+.formation-role-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+  margin: 1rem 0 3rem;
+  @media (min-width: 768px)  { grid-template-columns: 1fr 1fr; }
+  @media (min-width: 1200px) { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.formation-role-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #dde1ed;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 112px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+
+  &__img {
+    width: 33.333%;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__seam {
+    width: 2px;
+    flex-shrink: 0;
+    background: $formation-gold;
+    opacity: 0.85;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding-right: 0.9rem;
+  }
+
+  &__body {
+    flex: 1;
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  &__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.02rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: $formation-navy-900;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: #6e7487;
+    margin: 0;
+    letter-spacing: 0.01em;
+  }
+
+  &__chev {
+    flex-shrink: 0;
+    align-self: center;
+    margin-left: 0.9rem;
+    color: $formation-navy-900;
+    font-size: 1.25rem;
+    font-weight: 300;
+    transition: color 0.15s ease, transform 0.18s ease;
+  }
+
+  &:hover {
+    border-color: $formation-navy-900;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(15,32,53,0.08);
+
+    .formation-role-card__chev {
+      color: #B68A2E;
+      transform: translateX(3px);
+    }
+  }
+}
+
 // --- Scroll-padding-top on the scrollport ---
 // Applied globally to <html> because the sticky nav is site-wide.
 // scroll-padding-top on the root is what modern browsers honour for
