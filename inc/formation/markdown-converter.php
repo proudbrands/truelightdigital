@@ -25,9 +25,10 @@ function tld_formation_md_to_blocks($markdown) {
     $chunk = trim($chunk);
     if ($chunk === '') continue;
 
-    // Horizontal rule
+    // Horizontal rule — skipped by design. Source markdown uses `---` as
+    // editorial landmarks between sections; the h2 headings provide visual
+    // structure on-page, so emitting separator blocks is noise.
     if (preg_match('/^-{3,}$|^\*{3,}$/', $chunk)) {
-      $blocks[] = '<!-- wp:separator --><hr class="wp-block-separator has-alpha-channel-opacity"/><!-- /wp:separator -->';
       continue;
     }
 
