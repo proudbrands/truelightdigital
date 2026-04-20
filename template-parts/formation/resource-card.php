@@ -46,7 +46,8 @@ if (!$description) {
   $description = wp_strip_all_tags(get_the_excerpt($r));
 }
 
-$title = get_the_title($r);
+$title     = get_the_title($r);
+$permalink = get_permalink($r);
 
 $has_pdf     = is_array($pdf)  && !empty($pdf['url']);
 $has_docx    = is_array($docx) && !empty($docx['url']);
@@ -56,7 +57,7 @@ $has_preview = is_array($html_preview) && !empty($html_preview['url']);
 
   <?php if ($preview_image && is_array($preview_image) && !empty($preview_image['url'])): ?>
     <div class="tld-resource-card__image">
-      <img src="<?php echo esc_url($preview_image['url']); ?>" alt="" loading="lazy" />
+      <a href="<?php echo esc_url($permalink); ?>"><img src="<?php echo esc_url($preview_image['url']); ?>" alt="" loading="lazy" /></a>
     </div>
   <?php endif; ?>
 
@@ -71,10 +72,7 @@ $has_preview = is_array($html_preview) && !empty($html_preview['url']);
     </div>
 
     <h3 class="tld-resource-card__title">
-      <?php if ($supplemental_id): ?>
-        <span class="tld-resource-card__id"><?php echo esc_html($supplemental_id); ?> &middot; </span>
-      <?php endif; ?>
-      <?php echo esc_html($title); ?>
+      <a href="<?php echo esc_url($permalink); ?>"><?php echo esc_html($title); ?></a>
     </h3>
 
     <?php if ($description): ?>
@@ -110,6 +108,14 @@ $has_preview = is_array($html_preview) && !empty($html_preview['url']);
           download
           aria-label="Download <?php echo esc_attr($title); ?> as DOCX"
         >DOCX</a>
+      <?php endif; ?>
+
+      <?php // Fallback: if no Preview/PDF/DOCX buttons would render, offer a Read link to the resource page
+      if (!$has_preview && !$has_pdf && !$has_docx): ?>
+        <a
+          class="tld-resource-card__btn tld-resource-card__btn--preview"
+          href="<?php echo esc_url($permalink); ?>"
+        >Read</a>
       <?php endif; ?>
     </div>
   </div>
