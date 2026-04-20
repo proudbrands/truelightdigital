@@ -684,13 +684,15 @@ body.single-tld_resource {
 }
 
 // --- Section lede: framing paragraph before pillar/role sections ---
+// Default left-aligned; the first-child override in formation-landing__content
+// centers the pillar lede to balance against the hero above it.
 .formation-section-lede {
   font-family: 'Inter', sans-serif;
   font-size: 1.05rem;
   line-height: 1.65;
   color: $formation-navy-700;
   max-width: 62ch;
-  margin: 2.5rem auto 2rem;
+  margin: 2.5rem 0 2rem;
   text-align: left;
 }
 
