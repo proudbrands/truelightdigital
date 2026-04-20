@@ -19,14 +19,16 @@ defined('ABSPATH') || exit;
 
 get_header();
 
-// Hero image — prefer ACF field on the page; fall back to the Unsplash
-// placeholder so the page never renders without a hero.
-$hero_image_acf = function_exists('get_field') ? get_field('hero_image') : '';
-$hero_image = $hero_image_acf ?: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=2000&q=75';
+// Hero image — prefer the page's Featured Image (standard WP UX), fall
+// back to the Unsplash placeholder so the page never renders blank.
+// Needs the_post() to have run; $post_id pulled from the query below.
 ?>
 <main id="primary" class="site-main formation-landing">
 
-  <?php if (have_posts()): while (have_posts()): the_post(); ?>
+  <?php if (have_posts()): while (have_posts()): the_post();
+    $hero_image = get_the_post_thumbnail_url(get_the_ID(), 'full')
+      ?: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=2000&q=75';
+  ?>
 
     <header class="formation-hero--image" style="background-image: url('<?php echo esc_url($hero_image); ?>');">
       <div class="container">
