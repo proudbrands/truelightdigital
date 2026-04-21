@@ -3907,9 +3907,23 @@ body {
   }
 }
 
-// Pillar cards get a serif italic numeral in gold.
-.tld-pillar-card {
+// Service-page pillar cards get a serif italic numeral in gold.
+// Scoped to .tld-pillars-section (the service-page wrapper) so we override
+// Formation's .tld-pillar-card 3-col grid layout — otherwise the service
+// pillar title got squashed into a 100px track and rendered vertically.
+.tld-pillars-section .tld-pillar-card {
+  display: block;
+  grid-template-columns: none;
+  gap: 0;
   position: relative;
+  background: var(--tld-white);
+  border: none;
+  border-left: 4px solid var(--tld-gold);
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  text-align: left;
 
   &__numeral {
     font-family: 'Playfair Display', Georgia, serif;
@@ -3920,6 +3934,7 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
+    text-align: left;
   }
 }
 
