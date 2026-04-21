@@ -3870,3 +3870,84 @@ body {
 
 // --- Formation area ---
 @import "formation";
+
+// ── Service page redesign (2026-04-21) ──────────────────────────
+
+// Pull-quote breath moment between pillars and process.
+.tld-service-pullquote {
+  padding: 4rem 0;
+  background: #fff;
+  text-align: center;
+
+  &__mark {
+    color: var(--tld-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4rem;
+    line-height: 0.5;
+    margin: 0 0 1rem;
+    display: block;
+  }
+  &__text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--tld-dark-navy);
+    max-width: 32ch;
+    margin: 0 auto 1rem;
+    font-weight: 400;
+  }
+  &__attribution {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tld-muted);
+    margin: 0;
+  }
+}
+
+// Pillar cards get a serif italic numeral in gold.
+.tld-pillar-card {
+  position: relative;
+
+  &__numeral {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--tld-gold);
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+// Why-us section defaults to the full dark-navy anchor even without a bg image.
+.tld-whyus-section {
+  background: var(--tld-dark-navy);
+  color: #fff;
+
+  .tld-heading-section { font-size: clamp(1.5rem, 2.4vw, 1.8rem); }
+  .tld-whyus-icon-wrap svg { color: rgba(255, 255, 255, 0.55); }
+}
+
+// Problem statement H2 is the emotional hook — largest on the page.
+.tld-problem-heading {
+  font-size: clamp(1.75rem, 3vw, 2.4rem) !important;
+  line-height: 1.25;
+}
+
+// Gold restraint: demote the inline 'seconds' highlight to confident navy
+// (the hero eyebrow, pillar numeral, pullquote mark, process numeral, and
+// CTA button are the 5 deliberate gold surfaces). Remove opacity haze.
+.tld-problem-heading .text-gold {
+  color: var(--tld-dark-navy) !important;
+  font-weight: 700;
+}
+
+// Process section H2s stay at standard workhorse size.
+.tld-process-dark .tld-heading-section,
+.tld-faq-modern .tld-heading-section {
+  font-size: clamp(1.4rem, 2.1vw, 1.6rem);
+}
