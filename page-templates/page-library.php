@@ -75,7 +75,7 @@ foreach ($audience_terms_raw as $t) {
   </div>
 </header>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main formation-library-body">
   <div class="container py-4">
 
     <nav class="formation-filter-bar" aria-label="Filter the library">

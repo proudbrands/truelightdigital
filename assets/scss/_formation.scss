@@ -273,6 +273,12 @@ main[id="primary"] {
   }
 }
 
+// Library body background — warm off-white so white cards pop.
+.formation-library-body {
+  background: var(--tld-off-white);
+  padding-bottom: 4rem;
+}
+
 .formation-filter-bar {
   margin: 1.75rem 0 2rem;
   display: grid;
