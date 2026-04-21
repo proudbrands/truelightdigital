@@ -208,23 +208,26 @@ add_action('wp_enqueue_scripts', function () {
   }
 });
 
-// Output the modal HTML in the footer
+// Output the modal HTML in the footer.
+// Modal body is a HubSpot meetings embed — no Gravity Forms dependency.
 add_action('wp_footer', 'tld_discovery_modal', 5);
 function tld_discovery_modal() {
-  if (!function_exists('gravity_form')) return;
   ?>
   <div class="modal fade" id="tld-discovery-modal" tabindex="-1" aria-labelledby="tld-discovery-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content tld-modal-content">
         <div class="modal-header tld-modal-header">
           <div>
             <h5 class="modal-title" id="tld-discovery-modal-label">Book a Discovery Call</h5>
-            <p class="tld-modal-subtitle">Tell us a little about your project and we'll be in touch within one working day.</p>
+            <p class="tld-modal-subtitle">Pick a time that works. We&rsquo;ll send a calendar invite.</p>
           </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body tld-modal-body">
-          <?php gravity_form(TLD_DISCOVERY_FORM_ID, false, false, false, null, true); ?>
+          <!-- Start of Meetings Embed Script -->
+          <div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/sbrannon?embed=true"></div>
+          <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+          <!-- End of Meetings Embed Script -->
         </div>
       </div>
     </div>
