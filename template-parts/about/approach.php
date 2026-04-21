@@ -27,9 +27,9 @@ if (!$items) {
     <div class="row g-4 justify-content-center">
       <?php $i = 0; foreach ($items as $item) : $i++; ?>
         <div class="col-md-6 col-lg-<?= count($items) <= 3 ? '4' : '3'; ?> tld-reveal tld-reveal-d<?= min($i, 3); ?>">
-          <div class="tld-pillar-card">
-            <h3 class="tld-pillar-title"><?= esc_html($item['title']); ?></h3>
-            <p class="tld-pillar-text"><?= esc_html($item['description']); ?></p>
+          <div class="tld-approach-card">
+            <h3 class="tld-approach-card-title"><?= esc_html($item['title']); ?></h3>
+            <p class="tld-approach-card-text"><?= esc_html($item['description']); ?></p>
           </div>
         </div>
       <?php endforeach; ?>
