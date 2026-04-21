@@ -1143,3 +1143,35 @@ body.tld-preview-open {
     box-shadow: 0 4px 14px rgba(15,32,53,0.06);
   }
 }
+
+// --- Homepage: direct-help prose block ---
+.tld-home-direct-help {
+  padding: 3.5rem 0;
+  background: #fff;
+
+  &__body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: #2c3240;
+    max-width: 62ch;
+    margin: 0 auto;
+    text-align: left;
+  }
+  &__lead {
+    font-family: 'Playfair Display', serif;
+    color: $formation-navy-900;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  &__link {
+    color: $formation-navy-900;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid $formation-gold;
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+}
