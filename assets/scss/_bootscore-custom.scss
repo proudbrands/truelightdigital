@@ -762,6 +762,11 @@ body {
     .navbar-brand { min-width: 220px; }
   }
 
+  .tld-btn-gold,
+  .btn {
+    white-space: nowrap;
+  }
+
   .navbar-brand img {
     height: 40px;
     width: auto;
