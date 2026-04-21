@@ -185,71 +185,6 @@ acf_add_local_field_group([
       ],
     ],
     [
-      'key'          => 'field_tld_svc_problems_heading',
-      'label'        => 'Problem Points Heading',
-      'name'         => 'problems_heading',
-      'type'         => 'text',
-      'instructions' => 'Heading above the problems grid.',
-    ],
-    [
-      'key'          => 'field_tld_svc_problems_text',
-      'label'        => 'Problem Points Intro',
-      'name'         => 'problems_intro',
-      'type'         => 'textarea',
-      'rows'         => 2,
-      'instructions' => 'Short intro text below the heading.',
-    ],
-    [
-      'key'          => 'field_tld_svc_problems',
-      'label'        => 'Problem Points',
-      'name'         => 'problem_items',
-      'type'         => 'repeater',
-      'layout'       => 'table',
-      'min'          => 0,
-      'max'          => 8,
-      'button_label' => 'Add Problem',
-      'sub_fields'   => [
-        [
-          'key'   => 'field_tld_svc_problem_text',
-          'label' => 'Problem Statement',
-          'name'  => 'text',
-          'type'  => 'text',
-        ],
-      ],
-    ],
-    [
-      'key'          => 'field_tld_svc_audience_heading',
-      'label'        => 'Audience Section Heading',
-      'name'         => 'audience_heading',
-      'type'         => 'text',
-      'instructions' => 'Heading for "Who this is for".',
-    ],
-    [
-      'key'          => 'field_tld_svc_audience',
-      'label'        => 'Audience Cards',
-      'name'         => 'audience_items',
-      'type'         => 'repeater',
-      'layout'       => 'block',
-      'min'          => 0,
-      'max'          => 6,
-      'button_label' => 'Add Audience',
-      'sub_fields'   => [
-        [
-          'key'   => 'field_tld_svc_audience_title',
-          'label' => 'Title',
-          'name'  => 'title',
-          'type'  => 'text',
-        ],
-        [
-          'key'   => 'field_tld_svc_audience_desc',
-          'label' => 'Description',
-          'name'  => 'description',
-          'type'  => 'textarea',
-          'rows'  => 2,
-        ],
-      ],
-    ],
-    [
       'key'          => 'field_tld_svc_whyus_bg_image',
       'label'        => 'Why Us Background Image',
       'name'         => 'whyus_bg_image',
@@ -289,6 +224,21 @@ acf_add_local_field_group([
           'rows'  => 3,
         ],
       ],
+    ],
+    [
+      'key'          => 'field_tld_svc_pullquote_text',
+      'label'        => 'Pull-quote text',
+      'name'         => 'pullquote_text',
+      'type'         => 'textarea',
+      'rows'         => 3,
+      'instructions' => 'Optional. Centred italic quote shown between the pillars and the why-us section. 20–40 words. If left blank, defaults to the first Differentiator description.',
+    ],
+    [
+      'key'          => 'field_tld_svc_pullquote_attribution',
+      'label'        => 'Pull-quote attribution',
+      'name'         => 'pullquote_attribution',
+      'type'         => 'text',
+      'instructions' => 'Optional. Small line under the quote (e.g. "— Sean, True Light Digital"). Leave blank for no attribution.',
     ],
 
     // ── Process Steps ──
@@ -335,45 +285,6 @@ acf_add_local_field_group([
           'name'  => 'description',
           'type'  => 'textarea',
           'rows'  => 3,
-        ],
-      ],
-    ],
-
-    // ── Results / Impact ──
-    [
-      'key'   => 'field_tld_svc_tab_results',
-      'label' => 'Results',
-      'type'  => 'tab',
-    ],
-    [
-      'key'          => 'field_tld_svc_results_heading',
-      'label'        => 'Results Section Heading',
-      'name'         => 'results_heading',
-      'type'         => 'text',
-      'instructions' => 'Override heading for this section.',
-    ],
-    [
-      'key'          => 'field_tld_svc_results',
-      'label'        => 'Result Items',
-      'name'         => 'results_items',
-      'type'         => 'repeater',
-      'layout'       => 'block',
-      'min'          => 0,
-      'max'          => 8,
-      'button_label' => 'Add Result',
-      'sub_fields'   => [
-        [
-          'key'   => 'field_tld_svc_result_title',
-          'label' => 'Title',
-          'name'  => 'title',
-          'type'  => 'text',
-        ],
-        [
-          'key'   => 'field_tld_svc_result_desc',
-          'label' => 'Description',
-          'name'  => 'description',
-          'type'  => 'textarea',
-          'rows'  => 2,
         ],
       ],
     ],
@@ -437,23 +348,6 @@ acf_add_local_field_group([
       'type'         => 'text',
     ],
 
-    // ── Related ──
-    [
-      'key'   => 'field_tld_svc_tab_related',
-      'label' => 'Related Content',
-      'type'  => 'tab',
-    ],
-    [
-      'key'          => 'field_tld_svc_related_services',
-      'label'        => 'Related Services',
-      'name'         => 'related_services',
-      'type'         => 'relationship',
-      'post_type'    => ['page'],
-      'filters'      => ['search'],
-      'max'          => 3,
-      'return_format' => 'id',
-      'instructions' => 'Select up to 3 related service pages.',
-    ],
   ],
   'location' => [
     [
