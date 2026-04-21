@@ -753,8 +753,13 @@ body {
   }
 
   .navbar-brand {
-    flex-shrink: 1;
-    min-width: 0;
+    margin-right: 1.5rem;
+    min-width: 260px;   // reserves space for the wordmark + dot
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1199.98px) {
+    .navbar-brand { min-width: 220px; }
   }
 
   .navbar-brand img {
