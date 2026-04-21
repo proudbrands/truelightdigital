@@ -43,11 +43,6 @@ $approach_heading = get_field('services_approach_heading') ?: '';
 $approach_text    = get_field('services_approach_text') ?: '';
 $approach_points  = get_field('services_approach_points') ?: [];
 
-// Stats
-$stats_heading = get_field('services_stats_heading') ?: '';
-$stats_bg      = get_field('services_stats_bg_image') ?: '';
-$stats         = get_field('services_stat_items') ?: [];
-
 // Arrow SVG for buttons
 $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="ms-2"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>';
 ?>
@@ -228,42 +223,7 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
 
 
   <!-- ════════════════════════════════════════════════
-       SECTION 6: STATS
-       ════════════════════════════════════════════════ -->
-  <?php if ($stats) :
-    $stats_class = 'tld-section tld-stats-strip';
-    if ($stats_bg) {
-      $stats_class .= ' has-bg-image';
-    }
-  ?>
-  <section class="<?= esc_attr($stats_class); ?>"<?php if ($stats_bg) : ?> style="background-image: url('<?= esc_url($stats_bg); ?>');"<?php endif; ?>>
-    <div class="container">
-      <?php if ($stats_heading) : ?>
-        <div class="text-center mb-5">
-          <p class="tld-eyebrow tld-reveal" style="color: var(--tld-gold);">The Numbers</p>
-          <h2 class="tld-heading-section text-white tld-reveal tld-reveal-d1"><?= esc_html($stats_heading); ?></h2>
-        </div>
-      <?php endif; ?>
-      <div class="row g-4">
-        <?php $i = 0; foreach ($stats as $stat) : $i++; ?>
-          <div class="col-6 col-lg-3 tld-reveal tld-reveal-d<?= min($i, 3); ?>">
-            <div class="tld-stat-card text-center">
-              <span class="tld-stat-number"><?= esc_html($stat['number']); ?></span>
-              <h3 class="tld-stat-label"><?= esc_html($stat['label']); ?></h3>
-              <?php if (!empty($stat['description'])) : ?>
-                <p class="tld-stat-desc"><?= esc_html($stat['description']); ?></p>
-              <?php endif; ?>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-
-
-  <!-- ════════════════════════════════════════════════
-       SECTION 7: CTA
+       SECTION 6: CTA
        ════════════════════════════════════════════════ -->
   <?php tld_render_cta(); ?>
 

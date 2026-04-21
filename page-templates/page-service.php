@@ -32,8 +32,6 @@ $process_heading = function_exists('get_field') ? get_field('process_heading') :
 $results        = function_exists('get_field') ? get_field('results_items') : [];
 $results_heading = function_exists('get_field') ? get_field('results_heading') : '';
 $faqs           = function_exists('get_field') ? get_field('faq_items') : [];
-$stats          = function_exists('get_field') ? get_field('stat_items') : [];
-$stats_heading  = function_exists('get_field') ? get_field('stats_heading') : '';
 $problems       = function_exists('get_field') ? get_field('problem_items') : [];
 $problems_heading = function_exists('get_field') ? get_field('problems_heading') : '';
 $problems_intro = function_exists('get_field') ? get_field('problems_intro') : '';
@@ -41,10 +39,9 @@ $audience       = function_exists('get_field') ? get_field('audience_items') : [
 $audience_heading = function_exists('get_field') ? get_field('audience_heading') : '';
 $whyus          = function_exists('get_field') ? get_field('whyus_items') : [];
 $whyus_heading  = function_exists('get_field') ? get_field('whyus_heading') : '';
-$stats_bg       = function_exists('get_field') ? get_field('stats_bg_image') : '';
 $whyus_bg       = function_exists('get_field') ? get_field('whyus_bg_image') : '';
 $process_bg     = function_exists('get_field') ? get_field('process_bg_image') : '';
-$has_visual     = $stats || $problems || $audience || $whyus;
+$has_visual     = $problems || $audience || $whyus;
 
 $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="ms-2"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>';
 ?>
@@ -133,33 +130,6 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
        SECTION 4: VISUAL CONTENT (or Gutenberg fallback)
        ════════════════════════════════════════════════ -->
   <?php if ($has_visual) : ?>
-
-    <?php // ── 4A: Stats Strip (dark) ── ?>
-    <?php if ($stats) : ?>
-    <section class="tld-section tld-stats-strip<?= $stats_bg ? ' has-bg-image' : ''; ?>"<?php if ($stats_bg) : ?> style="background-image: url('<?= esc_url($stats_bg); ?>');"<?php endif; ?>>
-      <div class="container">
-        <?php if ($stats_heading) : ?>
-          <div class="text-center mb-5">
-            <p class="tld-eyebrow tld-reveal" style="color: var(--tld-gold);">The Reality</p>
-            <h2 class="tld-heading-section text-white tld-reveal tld-reveal-d1"><?= esc_html($stats_heading); ?></h2>
-          </div>
-        <?php endif; ?>
-        <div class="row g-4">
-          <?php $i = 0; foreach ($stats as $stat) : $i++; ?>
-            <div class="col-6 col-lg-3 tld-reveal tld-reveal-d<?= min($i, 3); ?>">
-              <div class="tld-stat-card text-center">
-                <span class="tld-stat-number"><?= esc_html($stat['number']); ?></span>
-                <h3 class="tld-stat-label"><?= esc_html($stat['label']); ?></h3>
-                <?php if (!empty($stat['description'])) : ?>
-                  <p class="tld-stat-desc"><?= esc_html($stat['description']); ?></p>
-                <?php endif; ?>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
-    <?php endif; ?>
 
     <?php // ── 4B: What Changes (positive benefits) ── ?>
     <?php if ($problems) : ?>
