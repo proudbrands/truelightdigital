@@ -40,7 +40,7 @@ $kind_terms = get_terms([
 // Audience terms are presented in editorial reading order (priest → people
 // around the priest → broader stakeholders). Falls back to get_terms order
 // for any term not in the canonical list (so new terms still surface).
-$audience_order = ['priest', 'parish-secretary', 'curator', 'new-curator', 'volunteer', 'ppc-chair', 'ppc-member', 'diocesan-staff', 'agency', 'all'];
+$audience_order = ['priest', 'parish-secretary', 'curator', 'volunteer', 'ppc', 'diocesan-staff', 'agency'];
 $audience_terms_raw = get_terms([
   'taxonomy'   => 'audience',
   'hide_empty' => true,
@@ -96,7 +96,6 @@ foreach ($audience_terms_raw as $t) {
       <?php if (!empty($audience_terms)): ?>
       <div class="formation-filter-row">
         <span class="formation-filter-label">Who it's for:</span>
-        <button type="button" class="pill" data-library-filter="audience" data-filter="all" aria-pressed="true">Anyone</button>
         <?php foreach ($audience_terms as $a): ?>
           <button type="button" class="pill" data-library-filter="audience" data-filter="<?php echo esc_attr($a->slug); ?>" aria-pressed="false"><?php echo esc_html($a->name); ?></button>
         <?php endforeach; ?>

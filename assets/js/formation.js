@@ -108,9 +108,14 @@
       pill.addEventListener('click', function () {
         var axis = pill.getAttribute('data-library-filter');
         var value = pill.getAttribute('data-filter');
-        state[axis] = value;
+        // Click the already-selected pill to reset the axis to 'all'.
+        // Gives rows that lack a dedicated reset pill (the Audience row
+        // after 2026-04-21) a visible way back to "show everything".
+        var isReset = (state[axis] === value && value !== 'all');
+        state[axis] = isReset ? 'all' : value;
         bar.querySelectorAll('[data-library-filter="' + axis + '"]').forEach(function (p) {
-          p.setAttribute('aria-pressed', p === pill ? 'true' : 'false');
+          var pressed = (!isReset && p === pill) || (p.getAttribute('data-filter') === 'all' && state[axis] === 'all');
+          p.setAttribute('aria-pressed', pressed ? 'true' : 'false');
         });
         applyFilter();
       });

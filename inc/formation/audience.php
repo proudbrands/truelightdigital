@@ -52,17 +52,18 @@ function tld_formation_register_audience() {
 add_action('after_switch_theme', 'tld_formation_seed_audience_terms');
 
 function tld_formation_seed_audience_terms() {
+  // Canonical audience taxonomy — consolidated 2026-04-21. Previous terms
+  // new-curator / ppc-chair / ppc-member / all were merged into curator,
+  // ppc, and (for 'all') removed entirely. See the 2026-04-21 migration in
+  // workfolder/ for the one-off re-tagging on prod.
   $terms = [
     'priest'            => 'The Priest',
     'parish-secretary'  => 'The Parish Secretary',
     'curator'           => 'The Curator',
-    'new-curator'       => 'The New Curator',
     'volunteer'         => 'The Volunteer',
-    'ppc-chair'         => 'The PPC Chair',
-    'ppc-member'        => 'The PPC Member',
+    'ppc'               => 'The PPC',
     'diocesan-staff'    => 'Diocesan Staff',
     'agency'            => 'Agencies & Consultants',
-    'all'               => 'Everyone',
   ];
   foreach ($terms as $slug => $name) {
     if (!term_exists($slug, 'audience')) {
