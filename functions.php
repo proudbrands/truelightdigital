@@ -234,3 +234,29 @@ function tld_discovery_modal() {
   </div>
   <?php
 }
+
+/**
+ * Resolve the optional WebM hero video URL for the current hero context.
+ *
+ * Reads the `hero_video_url` ACF field from either:
+ *   - a post/page (pass its ID) — covers home, formation landing, /services/,
+ *     /services/<service>/, cornerstone formation_pieces
+ *   - a taxonomy term (pass `"pillar_{$term_id}"`) — covers pillar archives
+ *
+ * Returns the URL string if set, or an empty string.
+ */
+function tld_get_hero_video_url($object_id = null) {
+  if (!function_exists('get_field')) return '';
+  $object_id = $object_id ?: get_the_ID();
+  $url = get_field('hero_video_url', $object_id);
+  return is_string($url) && $url !== '' ? $url : '';
+}
+
+/**
+ * Allow WebM uploads via the WP Media Library (not permitted by default on
+ * most hosts). Required so editors can upload converted hero videos.
+ */
+add_filter('upload_mimes', function ($mimes) {
+  $mimes['webm'] = 'video/webm';
+  return $mimes;
+});

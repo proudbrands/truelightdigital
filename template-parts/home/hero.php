@@ -12,8 +12,14 @@ defined('ABSPATH') || exit;
 
 $hero_image = get_the_post_thumbnail_url(get_the_ID(), 'full')
   ?: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=2000&q=75';
+$hero_video = tld_get_hero_video_url();
 ?>
-<header class="formation-hero--image" style="background-image: url('<?php echo esc_url($hero_image); ?>');">
+<header class="formation-hero--image<?= $hero_video ? ' formation-hero--image--has-video' : ''; ?>" style="background-image: url('<?php echo esc_url($hero_image); ?>');">
+  <?php if ($hero_video): ?>
+    <video class="formation-hero--image__video" autoplay muted loop playsinline preload="metadata" poster="<?php echo esc_url($hero_image); ?>" aria-hidden="true">
+      <source src="<?php echo esc_url($hero_video); ?>" type="video/webm">
+    </video>
+  <?php endif; ?>
   <div class="container">
     <span class="formation-hero--image__eyebrow">A digital practice run like a charity</span>
     <h1 class="formation-hero--image__title">If we look after each other, the rest follows.</h1>

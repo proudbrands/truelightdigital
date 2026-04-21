@@ -11,8 +11,22 @@ $pillar       = (!is_wp_error($pillar_terms) && !empty($pillar_terms)) ? $pillar
 $subtitle     = get_field('subtitle');
 $reading_time = (int) get_field('reading_time_minutes');
 $date         = get_the_date('F Y');
+
+// Hero video override: read from the piece itself first; fall back to the
+// pillar-term-level override if the piece has none. This lets a pillar
+// carry a default video for every cornerstone that belongs to it.
+$hero_video = tld_get_hero_video_url();
+if (!$hero_video && $pillar) {
+  $hero_video = tld_get_hero_video_url('pillar_' . $pillar->term_id);
+}
+$poster = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'tld-hero') : '';
 ?>
-<header class="formation-hero">
+<header class="formation-hero<?= $hero_video ? ' formation-hero--has-video' : ''; ?>">
+  <?php if ($hero_video): ?>
+    <video class="formation-hero__video" autoplay muted loop playsinline preload="metadata"<?php if ($poster): ?> poster="<?php echo esc_url($poster); ?>"<?php endif; ?> aria-hidden="true">
+      <source src="<?php echo esc_url($hero_video); ?>" type="video/webm">
+    </video>
+  <?php endif; ?>
   <div class="container">
     <div class="formation-hero__meta">
       <?php if ($pillar): ?>

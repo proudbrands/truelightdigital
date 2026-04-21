@@ -22,6 +22,7 @@ $acf_field_files = [
   'block-fields',
   'resource-fields',
   'resources-page-fields',
+  'hero-video-override',
 ];
 
 foreach ($acf_field_files as $file) {

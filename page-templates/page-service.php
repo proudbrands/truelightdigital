@@ -48,10 +48,17 @@ $arrow_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fil
 ?>
 <main id="primary" class="site-main">
 
-  <?php if (have_posts()): while (have_posts()): the_post(); ?>
+  <?php if (have_posts()): while (have_posts()): the_post();
+    $hero_video = tld_get_hero_video_url();
+  ?>
 
     <!-- Section 1: Hero -->
-    <header class="formation-hero--image" style="background-image: url('<?php echo esc_url($hero_image); ?>');">
+    <header class="formation-hero--image<?= $hero_video ? ' formation-hero--image--has-video' : ''; ?>" style="background-image: url('<?php echo esc_url($hero_image); ?>');">
+      <?php if ($hero_video): ?>
+        <video class="formation-hero--image__video" autoplay muted loop playsinline preload="metadata" poster="<?php echo esc_url($hero_image); ?>" aria-hidden="true">
+          <source src="<?php echo esc_url($hero_video); ?>" type="video/webm">
+        </video>
+      <?php endif; ?>
       <div class="container">
         <?php if ($eyebrow): ?>
           <span class="formation-hero--image__eyebrow"><?= esc_html($eyebrow); ?></span>
