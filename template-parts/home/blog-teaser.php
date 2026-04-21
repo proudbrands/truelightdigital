@@ -8,8 +8,11 @@
 defined('ABSPATH') || exit;
 
 $recent_posts = get_posts([
+  'post_type'      => 'formation_piece',
   'posts_per_page' => 3,
   'post_status'    => 'publish',
+  'orderby'        => 'date',
+  'order'          => 'DESC',
 ]);
 
 if (empty($recent_posts)) {
@@ -22,10 +25,10 @@ if (empty($recent_posts)) {
 
     <div class="d-flex justify-content-between align-items-end mb-5 flex-wrap gap-3">
       <div>
-        <p class="tld-eyebrow tld-reveal">Insights</p>
-        <h2 class="tld-heading-section mb-0 tld-reveal tld-reveal-d1">Latest insights</h2>
+        <p class="tld-eyebrow tld-reveal">Latest</p>
+        <h2 class="tld-heading-section mb-0 tld-reveal tld-reveal-d1">Latest from Formation</h2>
       </div>
-      <a href="<?= esc_url(home_url('/blog/')); ?>" class="btn btn-outline-primary tld-btn-arrow tld-reveal tld-reveal-d1">
+      <a href="<?= esc_url(home_url('/formation/')); ?>" class="btn btn-outline-primary tld-btn-arrow tld-reveal tld-reveal-d1">
         View all
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="ms-2"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>
       </a>
