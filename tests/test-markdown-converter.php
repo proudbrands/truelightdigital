@@ -25,6 +25,15 @@ assertContains($out, '<!-- wp:heading {"level":2} --><h2>Hello</h2><!-- /wp:head
 $out = tld_formation_md_to_blocks("### Sub\n");
 assertContains($out, '<!-- wp:heading {"level":3} --><h3>Sub</h3><!-- /wp:heading -->', 'h3 -> wp:heading block');
 
+$out = tld_formation_md_to_blocks("#### Section 1: The function\n");
+assertContains($out, '<!-- wp:heading {"level":4} --><h4>Section 1: The function</h4><!-- /wp:heading -->', 'h4 -> wp:heading block');
+
+$out = tld_formation_md_to_blocks("##### Deeper\n");
+assertContains($out, '<!-- wp:heading {"level":5} --><h5>Deeper</h5><!-- /wp:heading -->', 'h5 -> wp:heading block');
+
+$out = tld_formation_md_to_blocks("###### Deepest\n");
+assertContains($out, '<!-- wp:heading {"level":6} --><h6>Deepest</h6><!-- /wp:heading -->', 'h6 -> wp:heading block');
+
 // Paragraph
 $out = tld_formation_md_to_blocks("This is a paragraph.\n");
 assertContains($out, '<!-- wp:paragraph --><p>This is a paragraph.</p><!-- /wp:paragraph -->', 'paragraph');

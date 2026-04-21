@@ -32,8 +32,8 @@ function tld_formation_md_to_blocks($markdown) {
       continue;
     }
 
-    // Heading
-    if (preg_match('/^(#{2,3})\s+(.+)$/', $chunk, $m)) {
+    // Heading (h2 – h6; h1 reserved for post title)
+    if (preg_match('/^(#{2,6})\s+(.+)$/', $chunk, $m)) {
       $level = strlen($m[1]);
       $text  = _tld_md_inline($m[2]);
       $blocks[] = '<!-- wp:heading {"level":' . $level . '} --><h' . $level . '>' . $text . '</h' . $level . '><!-- /wp:heading -->';
